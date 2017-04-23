@@ -142,7 +142,7 @@ class UpdateVATSIM extends Command
 
             // Set aircraft, ensure to filter out things like (2H/) and (/L)
             if (preg_match("/^(?:.\/)?([^\/]+)(?:\/.)?/", $data[planned_aircraft], $matches)) {
-                $flight->aircraft_type = $matches[1];
+                $flight->aircraft_type = substr($matches[1], 0, 4);
             } else {
                 $flight->aircraft_type = $data[planned_aircraft];
             }
