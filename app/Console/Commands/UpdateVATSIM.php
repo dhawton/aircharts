@@ -103,7 +103,7 @@ class UpdateVATSIM extends Command
             }
         }
 
-
+        unset($output);
         exec("sed -n -r \"s/UPDATE = ([0-9]+)/\\1/p\" " . env('VATTRACK_DATAFILE'), $output);
         $cur = config('vattrack.lasttsfile');
 
