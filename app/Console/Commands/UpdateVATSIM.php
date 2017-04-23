@@ -127,7 +127,7 @@ class UpdateVATSIM extends Command
                 $flight = new Flight();
 
                 $flight->callsign = $data[callsign];
-                $flight->cid = $data[cid];
+                $flight->vatsim_id = $data[cid];
                 $flight->status = "Departing Soon";
             }
 
