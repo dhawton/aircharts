@@ -108,7 +108,10 @@ class UpdateVATSIM extends Command
         $stream = file(env('VATTRACK_DATAFILE'), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $in_clients = 0;
         foreach ($stream as $line) {
-            if (preg_match("/^!CLIENTS:/", $line)) $in_clients = 1;
+            if (preg_match("/^!CLIENTS:/", $line)) {
+                $in_clients = 1;
+                continue;
+            }
             elseif (preg_match("/^!/", $line) && $in_clients) $in_clients = 0;
 
             if (!$in_clients || preg_match("/^;/", $line)) continue;
