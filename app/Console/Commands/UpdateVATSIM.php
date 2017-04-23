@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Flight;
+use App\Models\Positions;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -171,7 +172,7 @@ class UpdateVATSIM extends Command
             $flight->missing_count = 0;
             $flight->save();
 
-            $position = new Position();
+            $position = new Positions();
             $position->flight_id = $flight->id;
             $position->lat = $data[latitude];
             $position->lon = $data[longitude];
