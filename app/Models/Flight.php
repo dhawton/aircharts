@@ -37,7 +37,7 @@ class Flight extends Model {
     }
 
     function airborne() {
-        if (!$this->checkDeparture && !$this->checkArrival()) {
+        if (!$this->checkDeparture() && !$this->checkArrival()) {
             if ($this->alt > 2000 && $this->spd > 40) return true;
         }
         return false;
