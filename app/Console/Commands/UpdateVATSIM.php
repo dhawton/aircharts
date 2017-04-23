@@ -211,7 +211,7 @@ class UpdateVATSIM extends Command
             $flight->save();
 
             if ($flight->missing_count >= 5) {
-                $flight->positions->delete();
+                $flight->positions()->delete();
                 $flight->delete();
             }
         }
