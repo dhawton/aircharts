@@ -126,8 +126,8 @@ class UpdateVATSIM extends Command
             $data[planned_altitude] = preg_replace("/[FAL]+/", "", $data[planned_altitude]); // Change ICAO and FL350 altitude entries into VATSIM-standard
             if (strlen($data[planned_altitude]) < 4) $data[planned_altitude] = $data[planned_altitude] . "00"; // Make altitudes consistent
             $data[planned_route] = str_replace("DCT", "", $data[planned_route]);
-            $data[planned_route] = preg_replace("/\s+/", " ", $data[planned_route]); // Remove extra spaces
-            $data[planned_route] = preg_replace("/[\+\.]/", "", $data[planned_route]); // Ignore VATSIM ATC amendment and misc. markings
+            $data[planned_route] = preg_replace("/[\+\.]/", " ", $data[planned_route]); // Ignore VATSIM ATC amendment and misc. markings
+            $data[planned_route] = preg_replace("/\s+/", " ", trim($data[planned_route])); // Remove extra spaces
 
             $new = 0;
             $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->orderBy("created_at")->first();
