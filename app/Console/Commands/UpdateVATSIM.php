@@ -136,6 +136,8 @@ class UpdateVATSIM extends Command
             // Update Flight Plan details (in case they updated on their end)
             $flight->lat = $data[latitude];
             $flight->lon = $data[longitude];
+            $data[altitude] = str_replace('FL','', $data[altitude]);
+            if (strlen($data[altitude]) < 4) { $data[altitude] = $data[altitude] . '00'; }
             $flight->alt = $data[altitude];
             $flight->hdg = $data[heading];
             $flight->spd = $data[groundspeed];
