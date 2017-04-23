@@ -119,7 +119,7 @@ class UpdateVATSIM extends Command
 
             $data = explode(":", $line);
             if($data[clienttype] == "ATC") continue;
-            if(!$data['departure'] || !$data['arrival'] || !$data['route']) continue;
+            if(!$data[planned_depairport] || !$data[planned_destairport] || !$data[route]) continue;
 
             // Reformat some variables.
             $data[callsign] = str_replace("-", "", $data[callsign]);
