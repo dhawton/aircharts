@@ -18,7 +18,7 @@ class Flight extends Model {
         $arrap = Airport::find($this->arrival);
         if (!$arrap) return -1;
 
-        if (MathHelper::calc_distance($this->lat, $this->lon, $arrap->lat, $arrap->lon) < 15) {
+        if (MathHelper::calc_distance($this->lat, $this->lon, $arrap->lat, $arrap->lon) < 15 && $this->altitude > $arrap->elevation + 2000) {
             return true;
         }
         return false;
