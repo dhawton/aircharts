@@ -90,6 +90,20 @@ class UpdateVATSIM extends Command
 
         if (config('vattrack.debug')) echo "Firing UpdateVATSIM\nChecking timestamp... ";
 
+        // Make sure file is fully uploaded
+        $ready = false; $count = 0;
+        while (!$ready) {
+            exec("sed -n \"/;   END/p\" " . env('VATTRACK_DATAFILE'), $output);
+            if (isset($output[0]) && $output[0] == ";   END") {
+                $ready = true;
+            }
+            else {
+                $count++;
+                if ($count >= 10) { echo "Failed."; exit; }
+            }
+        }
+
+
         exec("sed -n -r \"s/UPDATE = ([0-9]+)/\\1/p\" " . env('VATTRACK_DATAFILE'), $output);
         $cur = config('vattrack.lasttsfile');
 
@@ -196,7 +210,7 @@ class UpdateVATSIM extends Command
             $flight->missing_count += 1;
             $flight->save();
 
-            if ($flight->missing_count == 5) {
+            if ($flight->missing_count >= 5) {
                 $flight->positions->delete();
                 $flight->delete();
             }
