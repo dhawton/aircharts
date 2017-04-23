@@ -139,7 +139,7 @@ class UpdateVATSIM extends Command
             $flight->spd = $data[groundspeed];
 
             // Set aircraft, ensure to filter out things like (2H/) and (/L)
-            if (preg_match("/^\d+?[A-Z]+?\/?([A-Z0-9a-z]{2,4})\/?/", $data[planned_aircraft], $matches)) {
+            if (preg_match("/^(?:.\/)?([^\/]+)(?:\/.)?/", $data[planned_aircraft], $matches)) {
                 $flight->aircraft_type = $matches[1];
             } else {
                 $flight->aircraft_type = $data[planned_aircraft];
