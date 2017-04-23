@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Classes\MathHelper;
 
-class Flight extends Eloquent {
+class Flight extends Model {
     protected $table = 'flights';
     public $timestamps = true;
     protected $dates = ['departure_time','arrival_time','deleted_at'];

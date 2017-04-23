@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Airport extends Eloquent {
+use Illuminate\Database\Eloquent\Model;
+
+class Flight extends Model {
     protected $table = 'airports';
     public $timestamps = true;
     protected $connection = "vattrack";
