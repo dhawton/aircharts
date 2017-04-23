@@ -185,10 +185,10 @@ class UpdateVATSIM extends Command
         }
 
         foreach (Flight::where('status', 'NOT LIKE', 'Arrived')->where('last_update','<',$current_update)->get() as $flight) {
-            $flight->missing += 1;
+            $flight->missing_count += 1;
             $flight->save();
 
-            if ($flight->missing == 5) {
+            if ($flight->missing_count == 5) {
                 $flight->positions->delete();
                 $flight->delete();
             }
