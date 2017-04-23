@@ -118,6 +118,7 @@ class UpdateVATSIM extends Command
             if (!$in_clients || preg_match("/^;/", $line)) continue;
 
             $data = explode(":", $line);
+            if($data[clienttype] == "ATC") continue;
 
             $data[callsign] = str_replace("-", "", $data[callsign]);
 
