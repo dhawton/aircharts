@@ -121,7 +121,11 @@ class UpdateVATSIM extends Command
             if($data[clienttype] == "ATC") continue;
             if(!$data['departure'] || !$data['arrival'] || !$data['route']) continue;
 
+            // Reformat some variables.
             $data[callsign] = str_replace("-", "", $data[callsign]);
+
+            $data[planned_altitude] = str_replace("FL", "", $data[planned_altitude]);
+            if (strlen($data[planned_altitude]) < 4) $data[planned_altitude] = $data[planned_altitude] . "00";
 
             $new = 0;
             $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->orderBy("created_at")->first();
@@ -137,8 +141,6 @@ class UpdateVATSIM extends Command
             // Update Flight Plan details (in case they updated on their end)
             $flight->lat = $data[latitude];
             $flight->lon = $data[longitude];
-            $data[altitude] = str_replace('FL','', $data[altitude]);
-            if (strlen($data[altitude]) < 4) { $data[altitude] = $data[altitude] . '00'; }
             $flight->alt = $data[altitude];
             $flight->hdg = $data[heading];
             $flight->spd = $data[groundspeed];
