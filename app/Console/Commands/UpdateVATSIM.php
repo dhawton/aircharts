@@ -123,9 +123,9 @@ class UpdateVATSIM extends Command
 
             // Reformat some variables.
             $data[callsign] = str_replace("-", "", $data[callsign]);
-
-            $data[planned_altitude] = str_replace("FL", "", $data[planned_altitude]);
+            $data[planned_altitude] = preg_replace("/[FAL]+/", "", $data[planned_altitude]);
             if (strlen($data[planned_altitude]) < 4) $data[planned_altitude] = $data[planned_altitude] . "00";
+            $data[planned_route] = preg_replace("/\s+/", " ", $data[planned_route]);
 
             $new = 0;
             $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->orderBy("created_at")->first();
