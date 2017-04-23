@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Flight extends Model {
+class Airport extends Model {
     protected $table = 'airports';
     public $timestamps = true;
     protected $connection = "vattrack";
