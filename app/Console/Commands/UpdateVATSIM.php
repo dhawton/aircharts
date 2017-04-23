@@ -139,6 +139,8 @@ class UpdateVATSIM extends Command
             $flight->alt = $data[altitude];
             $flight->hdg = $data[heading];
             $flight->spd = $data[groundspeed];
+            $flight->route = $data[route];
+            $flight->remarks = $data[remarks];
 
             // Set aircraft, ensure to filter out things like (2H/) and (/L)
             if (preg_match("/^(?:.\/)?([^\/]+)(?:\/.)?/", $data[planned_aircraft], $matches)) {
@@ -148,8 +150,8 @@ class UpdateVATSIM extends Command
             }
 
             // Update flight plan details in case flight plan has changed
-            $flight->departure = $data[planned_depairport];
-            $flight->arrival = $data[planned_destairport];
+            $flight->departure = substr($data[planned_depairport], 0, 4);
+            $flight->arrival = substr($data[planned_destairport], 0, 4);
             $flight->planned_alt = $data[planned_altitude];
 
             // Check the status now
