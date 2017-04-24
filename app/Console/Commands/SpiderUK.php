@@ -45,7 +45,7 @@ class SpiderUK extends Command
         $index = file($this->base_url . $this->index_url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
         foreach ($index as $index_line) {
             if (preg_match("!href=\"([^\"]+)\">(.+) - (EG[A-Z]{2})<\/a>!", $index_line, $matches)) {
-                $url = $this->base_url . $matches[1];
+                $url = str_replace("&amp;", "&", $this->base_url . $matches[1]);
                 $name = $matches[2];
                 $icao = $matches[3];
                 $airportfile = file($url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
