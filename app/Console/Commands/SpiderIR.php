@@ -43,16 +43,16 @@ class SpiderIR extends Command
     public function handle()
     {
         $due = \Storage::disk('local')->get('spider.ir.date');
-        if ($due && $due != strtoupper(date("d M Y"))) {
-            return;
-        }
 
         $airac = file($this->airac_url, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($airac as $line) {
             if (preg_match("!class=MsoSubtitle>\d+ [A-Z]{3,4} \d+ - (\d+ [A-Z]{3,4} \d+)!", $line, $matches)) {
-                \Storage::disk('local')->put('spider.ir.date', $matches[1]);
+                $airac_date = $matches[1];
             }
         }
+
+        if ($due != $airac_date) { echo "AIRAC Date mismatch, $due v $airac_date, running\n"; }
+        else { return; }
 
         $data = file($this->index, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($data as $line) {
