@@ -6,11 +6,6 @@ use App\Chart;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-define("ICAO", 0);
-define("AP_NAME", 1);
-define("CHART_TYPE", 2);
-define("CHART_NAME", 3);
-define("CHART_URL", 10);
 
 class SpiderAT extends Command
 {
