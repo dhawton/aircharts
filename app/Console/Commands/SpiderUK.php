@@ -51,7 +51,7 @@ class SpiderUK extends Command
                 $airportfile = file($url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES); $airporturl = $url;
                 foreach ($airportfile as $line) {
                     if (preg_match("!class=\"desc\"[^>]*><a target=\"_blank\" href=\"([^\"]+)\">(.+)\s+<\/a>!", $line, $matches)) {
-                        echo "$icao - " . $matches[2] . "\n";
+                        echo "$icao - " . $matches[2] . " - '" . $airporturl . "'\n";
                         if ($x == 10) { exit; }
                         $charturl = $matches[1];
                         $chartname = $matches[2];
@@ -90,10 +90,11 @@ class SpiderUK extends Command
                                 "protocol_version" => '1.1',
                                 "Referer" => $airporturl,
                                 "Host" => "www.ead.eurocontrol.int",
-                                'header'=>"Referer: $airporturl\r\nHost: www.eat.eurocontrol.int\r\nConnection: keep-alive\r\nAccept-language: en\r\n" .
+                                'header'=>"Referer: $airporturl\r\nHost: www.eat.eurocontrol.int\n\rConnection: keep-alive\r\nAccept-language: en\r\n" .
                                     "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36\r\n"
                             )
                         );
+
                         $context = stream_context_create($options);
                         \Storage::disk('s3')->put("uk/" . $chart->id . ".pdf", file_get_contents($charturl, false, $context), "public");
                         sleep(1);
