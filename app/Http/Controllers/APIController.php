@@ -18,7 +18,7 @@ class APIController extends Controller
         } else {
             $list = $data;
         }
-        
+
         $list = explode(",", $list);
         if (!is_array($list)) { $list[0] = $list; }
         $output = [];
@@ -36,6 +36,7 @@ class APIController extends Controller
                 $output[$id]['charts'][] = [
                     'id' => $chart->id,
                     'type' => $chart->charttype,
+                    'name' => $chart->chartname,
                     'url' => $chart->url
                 ];
             }
