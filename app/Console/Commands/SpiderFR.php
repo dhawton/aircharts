@@ -57,11 +57,11 @@ class SpiderFR extends Command
                 $chart->url = $url;
 
                 if (preg_match("!SID!", $chartname)) {
-                    $chart->charttype = "Departure";
+                    $chart->charttype = "SID";
                     $chartname = str_replace("SID ", "", $chartname);
                 }
                 elseif (preg_match("!STAR!", $chartname)) {
-                    $chart->charttype = "Approach";
+                    $chart->charttype = "STAR";
                     $chartname = str_replace("STAR ", "", $chartname);
                 }
                 elseif (preg_match("!IAC!", $chartname)) {
