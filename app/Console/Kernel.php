@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('UpdateVATSIM')->everyMinute();
 
         $schedule->command('spider:us')->dailyAt('01:00');
+        $schedule->command('spider:uk')->monthlyOn(1, '01:30');
 
         $schedule->command('airport:cache')->dailyAt('09:00');
     }

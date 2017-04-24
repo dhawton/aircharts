@@ -109,5 +109,11 @@ class SpiderUK extends Command
                 }
             }
         }
+
+        // Clear out non-updated UK charts
+        foreach (Chart::where('country', 'UK')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
+            \Storage::disk('s3')->delete("uk/" . $chart->id . ".pdf");
+            $chart->delete();
+        }
     }
 }
