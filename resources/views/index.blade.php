@@ -14,6 +14,7 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="https://maps-api-ssl.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 var map;
 function init() {
@@ -37,5 +38,7 @@ function init() {
 
     {!! $mappoints !!}
 }
+
+window.onload = init();
 </script>
 @endsection
