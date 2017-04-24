@@ -29,7 +29,7 @@ class ACController extends Controller
                 $results[] = [
                     'icao' => $airport->icao,
                     'iata' => $airport->iata,
-                    'name' => $airport->name
+                    'name' => $airport->airportname
                 ];
             }
         }
