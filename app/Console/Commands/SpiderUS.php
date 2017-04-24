@@ -50,7 +50,8 @@ class SpiderUS extends Command
             $airac += 1;
         }
 
-        $xml = file_get_contents("http://155.178.201.160/d-tpp/$airac/xml_data/d-TPP_Metafile.xml");
+        //$xml = file_get_contents("http://155.178.201.160/d-tpp/$airac/xml_data/d-TPP_Metafile.xml");
+        $xml = Storage::disk('local')->get('d-TPP_Metafile.xml');
         $xml = str_replace("version=\"1.1\"", "version=\"1.0\"", $xml);
         $xml = simplexml_load_string($xml);
 
@@ -73,7 +74,10 @@ class SpiderUS extends Command
                     $iata = $airport['apt_ident'];
                     $airport_name = $airport['ID'];
                     foreach($airport->record as $record) {
-                        $chart = Chart::where('chartname', $record->chart_name)->where('icao', $icao)->orWhere('iata', $iata)->first();
+                        $chart = Chart::where('chartname', $record->chart_name)->where(function($query) use ($iata, $icao) {
+                            $query->where('icao', $icao);
+                            $query->orWhere('iata', $iata);
+                        })->first();
                         if (!$chart) {
                             $chart = new Chart();
                         }
