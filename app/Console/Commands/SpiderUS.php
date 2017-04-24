@@ -92,7 +92,7 @@ class SpiderUS extends Command
                         else { $chart->charttype = "General"; }
                         $chart->url = "http://155.178.201.160/d-tpp/$cycle/" . $record->pdf_name;
                         $chart->flag = ($record->cn_flg != "N") ? $record->cn_flg : "";
-                        $chart->id = sha1("us.$icao,$iata." . $record->chartseq . $record->pdf_name);
+                        $chart->id = sha1("us.$icao,$iata." . $record->chart_name);
                         $chart->save();
                     }
                 }
