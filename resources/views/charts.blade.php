@@ -11,7 +11,7 @@
                                     - {{$result['name']}}</h2>
                             </div>
                             <div class="panel-body">
-                                @foreach(Charts::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'General')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
+                                @foreach(\App\Chart::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'General')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
                                     @if ($loop->first)
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -25,7 +25,7 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                @foreach(Charts::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'SID')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
+                                @foreach(\App\Chart::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'SID')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
                                     @if ($loop->first)
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -39,7 +39,7 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                @foreach(Charts::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'STAR')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
+                                @foreach(\App\Chart::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'STAR')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
                                     @if ($loop->first)
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -53,7 +53,7 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                @foreach(Charts::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'Intermediate')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
+                                @foreach(\App\Chart::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'Intermediate')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
                                     @if ($loop->first)
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -67,7 +67,7 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                @foreach(Charts::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'Approach')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
+                                @foreach(\App\Chart::where(function($query) use ($result) { $query->where('icao', $result['icao']); $query->orWhere('iata', $result['iata']); })->where('charttype', 'Approach')->orderBy('charttype')->orderBy('chartname')->get() as $chart)
                                     @if ($loop->first)
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
