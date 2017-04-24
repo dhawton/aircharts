@@ -145,7 +145,7 @@ class UpdateVATSIM extends Command
             $data[planned_route] = preg_replace("/\s+/", " ", trim($data[planned_route])); // Remove extra spaces
 
             $new = 0;
-            $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->orderBy("created_at")->first();
+            $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->orderBy("created_at", "DESC")->first();
             if (!$flight || ($flight->status == "Arrived" && $flight->checkArrival())) {
                 $new = 1;
                 $flight = new Flight();
