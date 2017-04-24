@@ -185,7 +185,7 @@ class UpdateVATSIM extends Command
                     $flight->status = "Departing Soon";
                 } elseif ($flight->checkArrival()) {
                     $flight->status = "Arrived";
-                } elseif ($flight->airbnorne()) {
+                } elseif ($flight->airborne()) {
                     $flight->status = "En-Route";
                 } else {
                     $flight->status = "Unknown";
