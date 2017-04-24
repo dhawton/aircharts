@@ -48,7 +48,7 @@ class SpiderPL extends Command
         $data = file($this->index, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
         $airports = [];
         foreach($data as $line) {
-            if (preg_match("!href=\"(airports\.php?d=EP..)\">(EP..) ([^<]+)<\/a>!i", $line, $matches)) {
+            if (preg_match("!href=\"(airports\.php\?d=EP..)\">(EP..) ([^<]+)<\/a>!i", $line, $matches)) {
                 $airports[] = [
                     'url' => $matches[1],
                     'icao' => $matches[2],
@@ -62,7 +62,7 @@ class SpiderPL extends Command
             $chart_name = "";
             $data = file($this->index, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
             foreach ($data as $line) {
-                if (preg_match("!href=\'download\.php?ts.+&file=(ead/EP_AD_.+\.pdf)\' class=\'aip\'!i", $line, $matches)) {
+                if (preg_match("!href=\'download\.php\?ts.+&file=(ead/EP_AD_.+\.pdf)\' class=\'aip\'!i", $line, $matches)) {
                     $chart_url = $matches[1];
                 }
                 if (preg_match("!\s+>(.+)<\/a>!", $line, $matches) && $chart_url) {
