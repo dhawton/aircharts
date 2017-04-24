@@ -83,13 +83,26 @@ class SpiderUK extends Command
                         $chart->airportname = $name;
                         $chart->chartname = $chartname;
                         $chart->charttype = $charttype;
+
+                        $header[] = "Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
+                        $header[] = "Cache-Control: max-age=0";
+                        $header[] = "Connection: keep-alive";
+                        $header[] = "Keep-Alive: 300";
+                        $header[] = "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7";
+                        $header[] = "Accept-Language: en-us,en;q=0.5";
+                        $header[] = "Pragma: "; // browsers keep this blank.
+
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                         curl_setopt($ch, CURLOPT_VERBOSE, true);
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
+                        curl_setopt($ch, CURLOPT_REFERER, $airporturl);
                         curl_setopt($ch, CURLOPT_URL,$url);
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+                        curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate,sdch');
                         $result=curl_exec($ch);
+
                         \Storage::disk('s3')->put("uk/" . $chart->id . ".pdf", $result, "public");
                         sleep(1);
                         $chart->url = "http://awsir.aircharts.org/uk/" . $chart->id . ".pdf";
