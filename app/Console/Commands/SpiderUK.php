@@ -50,8 +50,8 @@ class SpiderUK extends Command
                 $icao = $matches[3];
                 $airportfile = file($url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES); $airporturl = $url;
                 foreach ($airportfile as $line) {
-                    if (preg_match("!class=\"desc\" width=\"55%\"><a target=\"_blank\" href=\"([^\"]+)\">(.+)\s+<\/a>!", $line, $matches) ||
-                        preg_match("!class=\"desc\"[A-Z 0-9a-z\%\"]*><a target=\"_blank\" href=\"([^\"]+)\">(.+)\s+<\/a>!", $line, $matches)) {
+                    if (/*preg_match("!class=\"desc\" width=\"55%\"><a target=\"_blank\" href=\"([^\"]+)\">(.+)\s*<\/a>!", $line, $matches) ||*/
+                        preg_match("!class=\"desc\"[A-Z 0-9a-z\%\"]*><a target=\"_blank\" href=\"([^\"]+)\">(.+)\s*<\/a>!", $line, $matches)) {
                         echo "$icao - " . $matches[2] . " - '" . $airporturl . "'\n";
                         if ($x == 10) { exit; }
                         $charturl = $matches[1];
