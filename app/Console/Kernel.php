@@ -38,8 +38,13 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->command('UpdateVATSIM')->everyMinute();
 
+        $schedule->command('spider:at')->weeklyOn(1, '03:30');
+        $schedule->command('spider:ch')->dailyAt('02:40');
         $schedule->command('spider:de')->dailyAt('00:00');
         $schedule->command("spider:fr")->dailyAt("02:00");
+        $schedule->command('spider:hu')->dailyAt('02:30');
+        $schedule->command('spider:ir')->dailyAt('03:00');
+        $schedule->command('spider:pl')->weeklyOn(1,'03:40');
         $schedule->command('spider:us')->dailyAt('01:00');
         $schedule->command('spider:uk')->monthlyOn(1, '01:30');
 
