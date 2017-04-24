@@ -44,7 +44,7 @@ class SpiderUK extends Command
         $x = 0; // For testing purposes, only do ~10 charts.
         $index = file($this->base_url . $this->index_url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
         foreach ($index as $index_line) {
-            if (preg_match("!href=\"([^\"]+)\">(.+) - (EG[..])<\/a>!", $index_line, $matches)) {
+            if (preg_match("!href=\"([^\"]+)\">(.+) - (EG[A-Z]{2})<\/a>!", $index_line, $matches)) {
                 $url = $this->base_url . $matches[1];
                 $name = $matches[2];
                 $icao = $matches[3];
