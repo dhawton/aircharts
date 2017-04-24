@@ -50,7 +50,7 @@ class SpiderUK extends Command
                 $icao = $matches[3];
                 $airportfile = file($url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
                 foreach ($airportfile as $line) {
-                    if (preg_match("!class=\"desc\"[^\>]*><a target=\"_blank\" href=\"([^\"]+)\">(.+)\s+<\/a>!", $line, $matches)) {
+                    if (preg_match("!class=\"desc\"[^>]*><a target=\"_blank\" href=\"([^\"]+)\">(.+)\s+<\/a>!", $line, $matches)) {
                         echo "$icao - " . $matches[2] . "\n";
                         if ($x == 10) { exit; }
                         $charturl = $matches[1];
@@ -86,6 +86,8 @@ class SpiderUK extends Command
                         $options = array(
                             'http'=>array(
                                 'method'=>"GET",
+                                "user_agent" => "Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10",
+                                "protocol_version" => '1.1',
                                 'header'=>"Referer: $url\r\nAccept-language: en\r\n" .
                                     "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad
                             )
