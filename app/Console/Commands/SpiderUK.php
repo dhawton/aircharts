@@ -51,8 +51,6 @@ class SpiderUK extends Command
                 $airportfile = file($url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES); $airporturl = $url;
                 foreach ($airportfile as $line) {
                     if (preg_match("!class=\"desc\"[^>]*><a target=\"_blank\" href=\"([^\"]+)\">(.+)<\/a>!", $line, $matches)) {
-                        echo "$icao - " . $matches[2] . " - '" . $airporturl . "'\n";
-                        if ($x == 10) { exit; }
                         $charturl = $matches[1];
                         $chartname = trim($matches[2]);
                         $charttype = "General";
@@ -107,7 +105,6 @@ class SpiderUK extends Command
                         sleep(1);
                         $chart->url = "http://awsir.aircharts.org/uk/" . $chart->id . ".pdf";
                         $chart->save();
-                        $x++;
                     }
                 }
             }
