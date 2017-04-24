@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\UpdateVATSIM::class,
+        Commands\SpiderUK::class,
         Commands\SpiderUS::class,
         Commands\MakeCache::class,
     ];
