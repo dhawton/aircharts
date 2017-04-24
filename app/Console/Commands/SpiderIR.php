@@ -46,7 +46,7 @@ class SpiderIR extends Command
 
         $airac = file($this->airac_url, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($airac as $line) {
-            if (preg_match("!class=MsoSubtitle>\d+ [A-Z]{3,4} \d+ - (\d+ [A-Z]{3,4} \d+)!", $line, $matches)) {
+            if (preg_match("!(\d+ [A-Z]+ \d+)<\/p!i", $line, $matches)) {
                 $airac_date = $matches[1];
             }
         }
