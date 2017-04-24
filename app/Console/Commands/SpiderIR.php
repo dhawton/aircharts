@@ -88,6 +88,7 @@ class SpiderIR extends Command
                     $chart->airportname = $airport['name'];
                     $chart->chartname = $chart_title;
                     $chart->charttype = "General";
+                    $chart->country = "IR";
 
                     if (preg_match("!Departure!", $chart_title)) {
                         $chart->charttype = "SID";
