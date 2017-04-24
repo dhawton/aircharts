@@ -41,7 +41,7 @@ class SpiderUS extends Command
     public function handle()
     {
         $nextdate = Storage::disk('local')->get('spider.us.date');
-        //if ($nextdate != date("m/d/y")) return;
+        if ($nextdate != date("m/d/y")) return;
 
         $airac = Storage::disk('local')->get('spider.us.airac');
         if (substr($airac, -2) == "13") {
@@ -50,8 +50,7 @@ class SpiderUS extends Command
             $airac += 1;
         }
 
-        //$xml = file_get_contents("http://155.178.201.160/d-tpp/$airac/xml_data/d-TPP_Metafile.xml");
-        $xml = Storage::disk('local')->get('d-TPP_Metafile.xml');
+        $xml = file_get_contents("http://155.178.201.160/d-tpp/$airac/xml_data/d-TPP_Metafile.xml");
         $xml = str_replace("version=\"1.1\"", "version=\"1.0\"", $xml);
         $xml = simplexml_load_string($xml);
 

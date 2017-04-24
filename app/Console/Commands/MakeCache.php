@@ -46,6 +46,7 @@ class MakeCache extends Command
             $output .= "    var myLatLng = new google.maps.LatLng(" . $airport->lat . ", " . $airport->lon . ");\n";
             $output .= "    var markerOpt = { map: map, position: myLatLng, icon: '/images/map/dot.png' };\n";
             $output .= "    marker_$x = new google.maps.Marker(markerOpt);\n";
+            $x++;
         }
 
         \Storage::disk('local')->put('airport.cache', $output);
