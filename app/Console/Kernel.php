@@ -14,11 +14,12 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\UpdateVATSIM::class,
-        Commands\SpiderAT::class,
-        Commands\SpiderDE::class,
-        Commands\SpiderFR::class,
-        Commands\SpiderUK::class,
-        Commands\SpiderUS::class,
+        Commands\SpiderAT::class,           // Austria
+        Commands\SpiderCH::class,           // Switzerland
+        Commands\SpiderDE::class,           // Germany
+        Commands\SpiderFR::class,           // France
+        Commands\SpiderUK::class,           // UK
+        Commands\SpiderUS::class,           // US
         Commands\MakeCache::class,
     ];
 
