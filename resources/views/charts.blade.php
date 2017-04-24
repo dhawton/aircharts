@@ -3,6 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h2>Search Results</h2>
                 @foreach($results as $result)
                     <div class="panel-group">
                         <div class="panel panel-default">

@@ -65,19 +65,19 @@ class SpiderUK extends Command
                         $charturl = $matches[1];
                         $chartname = trim($matches[2]);
                         $charttype = "General";
-                        if (preg_match("!INSTRUMENT APPROACH (CHART|PROCEDURE|PROCEDURES) (.+)$!", $chartname, $matches)) {
+                        if (preg_match("!INSTRUMENT APPROACH (CHART|PROCEDURE|PROCEDURES) (.+)$!i", $chartname, $matches)) {
                             $charttype = "Approach";
                             $chartname = $matches[2];
                         }
-                        if (preg_match("!STANDARD DEPARTURE CHART\s+-\s+(.+)$!", $chartname, $matches)) {
+                        if (preg_match("!STANDARD DEPARTURE CHART\s+-\s+(.+)$!i", $chartname, $matches)) {
                             $charttype = "SID";
                             $chartname = $matches[1];
                         }
-                        if (preg_match("!STANDARD ARRIVAL CHART\s+-\s+(.+)$!", $chartname, $matches)) {
+                        if (preg_match("!STANDARD ARRIVAL CHART\s+-\s+(.+)$!i", $chartname, $matches)) {
                             $charttype = "STAR";
                             $chartname = $matches[1];
                         }
-                        if (preg_match("!INITIAL APPROACH PROCEDURES\s+-\s+(.+)$!", $chartname, $matches)) {
+                        if (preg_match("!INITIAL APPROACH PROCEDURES\s+-\s+(.+)$!i", $chartname, $matches)) {
                             $charttype = "Intermediate";
                             $chartname = $matches[1];
                         }
