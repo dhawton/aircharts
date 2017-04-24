@@ -69,17 +69,17 @@ class SpiderIR extends Command
             $data = file($airport['url'], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $chart_title = ""; $catch_rest = false;
             foreach($data as $line) {
-                if (preg_match("!p class=MsoHeading7>([^<]+)<\/p", $line, $matches)) {
+                if (preg_match("!p class=MsoHeading7>([^<]+)<\/p!i", $line, $matches)) {
                     $chart_title = $matches[1];
                     $catch_rest = false;
-                } elseif (preg_match("!p class=MsoHeading7>(.+)", $line, $matches)) {
+                } elseif (preg_match("!p class=MsoHeading7>(.+)!i", $line, $matches)) {
                     $chart_title = $matches[1];
                     $catch_rest = true;
                 } elseif (preg_match("(.+)</p>", $line, $matches) && $catch_rest) {
                     $chart_title .= $matches[1];
                     $catch_rest = false;
                 }
-                if (preg_match("!href=\"(Published.+\.pdf)\">EI..", $line, $matches)) {
+                if (preg_match("!href=\"(Published.+\.pdf)\">EI..!i", $line, $matches)) {
                     $chart_title = preg_replace("!\s+!", " ", trim($chart_title));
                     $chart = Chart::where("icao", $airport['icao'])->where('chartname', $chart_title)->first();
                     if (!$chart) { $chart = new Chart(); }
