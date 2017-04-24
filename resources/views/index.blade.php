@@ -1,4 +1,5 @@
 @extends('layout')
+@section('bodyclass')class="jumbo"@endsection
 @section('content')
 <div class="jumbotron">
     <div class="container">
