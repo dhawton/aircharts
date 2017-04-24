@@ -86,5 +86,10 @@ class SpiderFR extends Command
                 $chart->save();
             }
         }
+
+        // Clear out non-updated FR charts
+        foreach (Chart::where('country', 'FR')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
+            $chart->delete();
+        }
     }
 }
