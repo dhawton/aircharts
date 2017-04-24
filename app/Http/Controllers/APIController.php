@@ -18,10 +18,11 @@ class APIController extends Controller
         } else {
             $list = $data;
         }
-
+        
         $list = explode(",", $list);
+        if (!is_array($list)) { $list[0] = $list; }
         $output = [];
-        for($i = 0 ; $list[$i] ; $i++) {
+        for($i = 0 ; isset($list[$i]) ; $i++) {
             $airportdef = false; $id = $list[$i];
             foreach (Chart::where('icao', $list[$i])->orWhere('iata', $list[$i])->get() as $chart) {
                 if (!$airportdef) {
