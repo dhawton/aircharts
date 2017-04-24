@@ -74,7 +74,7 @@ class SpiderFR extends Command
 
                 $chart->chartname = $chartname;
 
-                $airport = Airport::where('icao', $icao)->first();
+                $airport = Airport::where('id', $icao)->first();
                 if ($airport) {
                     $chart->airportname = $airport->name;
                 } else {
