@@ -93,11 +93,11 @@ class SpiderUK extends Command
 
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                        curl_setopt($ch, CURLOPT_VERBOSE, true);
+                        curl_setopt($ch, CURLOPT_VERBOSE, false);
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
                         curl_setopt($ch, CURLOPT_REFERER, $airporturl);
-                        curl_setopt($ch, CURLOPT_URL,$url);
+                        curl_setopt($ch, CURLOPT_URL, $charturl);
                         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
                         curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate,sdch');
                         $result=curl_exec($ch);
