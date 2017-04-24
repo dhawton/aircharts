@@ -100,6 +100,7 @@ class SpiderUK extends Command
                         curl_setopt($ch, CURLOPT_URL, $charturl);
                         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
                         curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate,sdch');
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                         $result=curl_exec($ch);
 
                         \Storage::disk('s3')->put("uk/" . $chart->id . ".pdf", $result, "public");
