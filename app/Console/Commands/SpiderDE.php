@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Chart;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 define("ICAO", 0);
