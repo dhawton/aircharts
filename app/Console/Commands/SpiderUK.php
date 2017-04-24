@@ -19,10 +19,10 @@ class SpiderUK extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Spider for UK Charts';
 
     protected $base_url = "http://www.nats-uk.ead-it.com/public/";
-    protected $index_url = "index.php%3Foption=com_content&task=blogcategory&id=6&itemid=13.html";
+    protected $index_url = "index.php%3Foption=com_content&task=blogcategory&id=6&Itemid=13.html";
 
     /**
      * Create a new command instance.
