@@ -36,7 +36,7 @@ function init() {
     map = new google.maps.Map(document.getElementById("mapdiv"), myOpt);
     map.setOptions({styles: style0});
 
-    {{$mappoints}}
+    {!! $mappoints !!}
 }
 </script>
 @endsection
