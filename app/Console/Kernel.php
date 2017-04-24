@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\SpiderDE::class,           // Germany
         Commands\SpiderFR::class,           // France
         Commands\SpiderHU::class,           // Hungary
+        Commands\SpiderPL::class,           // Poland
         Commands\SpiderUK::class,           // UK
         Commands\SpiderUS::class,           // US
         Commands\MakeCache::class,
