@@ -1,12 +1,10 @@
 @extends('layout')
 @section('bodyclass')class="jumbo"@endsection
 @section('content')
-<div class="jumbotron">
     <div class="container">
         <h1 class="display-3">Welcome to AirCharts</h1>
         <p>Welcome to the new AirCharts.  Use the search box above to search for charts.</p>
     </div>
-</div>
 
 <div class="container">
     <div class="row">
