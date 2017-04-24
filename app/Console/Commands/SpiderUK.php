@@ -72,7 +72,6 @@ class SpiderUK extends Command
                             $charttype = "Intermediate";
                             $chartname = $matches[1];
                         }
-                        $pdf = file_get_contents($charturl);
                         $chart = Chart::where('icao', $icao)->where('chartname', $chartname)->first();
                         if (!$chart) {
                             $chart = new Chart();
