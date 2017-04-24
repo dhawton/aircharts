@@ -49,9 +49,11 @@ class SpiderPL extends Command
         $airports = [];
         foreach($data as $line) {
             if (preg_match("!href=\"(airports\.php?d=EP..)\">(EP..) ([^<]+)<\/a>!i", $line, $matches)) {
-                $airports[]['url'] = $matches[1];
-                $airports[]['icao'] = $matches[2];
-                $airports[]['name'] = $matches[3];
+                $airports[] = [
+                    'url' => $matches[1],
+                    'icao' => $matches[2],
+                    'name' => $matches[3]
+                    ];
             }
         }
 
