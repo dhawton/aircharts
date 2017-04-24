@@ -83,20 +83,14 @@ class SpiderUK extends Command
                         $chart->airportname = $name;
                         $chart->chartname = $chartname;
                         $chart->charttype = $charttype;
-                        $options = array(
-                            'http'=>array(
-                                'method'=>"GET",
-                                "user_agent" => "Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10",
-                                "protocol_version" => '1.1',
-                                "Referer" => $airporturl,
-                                "Host" => "www.ead.eurocontrol.int",
-                                'header'=>"Referer: $airporturl\r\nHost: www.eat.eurocontrol.int\n\rConnection: keep-alive\r\nAccept-language: en\r\n" .
-                                    "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36\r\n"
-                            )
-                        );
-
-                        $context = stream_context_create($options);
-                        \Storage::disk('s3')->put("uk/" . $chart->id . ".pdf", file_get_contents($charturl, false, $context), "public");
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($ch, CURLOPT_VERBOSE, true);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
+                        curl_setopt($ch, CURLOPT_URL,$url);
+                        $result=curl_exec($ch);
+                        \Storage::disk('s3')->put("uk/" . $chart->id . ".pdf", $result, "public");
                         sleep(1);
                         $chart->url = "http://awsir.aircharts.org/uk/" . $chart->id . ".pdf";
                         $chart->save();
