@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Chart;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class SpiderIR extends Command
@@ -112,5 +113,7 @@ class SpiderIR extends Command
         foreach (Chart::where('country', 'DE')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
             $chart->delete();
         }
+
+        \Storage::disk('local')->put('spider.ir.date', $airac_date);
     }
 }
