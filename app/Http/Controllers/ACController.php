@@ -34,6 +34,6 @@ class ACController extends Controller
             }
         }
 
-        return view('charts', ['errors' => $errors, 'results' => $results]);
+        return view('charts', ['error' => $errors, 'results' => $results]);
     }
 }
