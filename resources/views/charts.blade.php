@@ -20,7 +20,7 @@
                                             </div>
                                             <div class="panel-body">
                                                 @endif
-                                                <a href="{{$chart->url}}">{{$chart->chartname}}</a><br>
+                                                <a href="{{$chart->url}}" target="_blank">{{$chart->chartname}}</a><br>
                                                 @if ($loop->last)
                                             </div>
                                         </div>
@@ -34,7 +34,7 @@
                                             </div>
                                             <div class="panel-body">
                                                 @endif
-                                                <a href="{{$chart->url}}">{{$chart->chartname}}</a><br>
+                                                <a href="{{$chart->url}}" target="_blank">{{$chart->chartname}}</a><br>
                                                 @if ($loop->last)
                                             </div>
                                         </div>
@@ -48,7 +48,7 @@
                                             </div>
                                             <div class="panel-body">
                                                 @endif
-                                                <a href="{{$chart->url}}">{{$chart->chartname}}</a><br>
+                                                <a href="{{$chart->url}}" target="_blank">{{$chart->chartname}}</a><br>
                                                 @if ($loop->last)
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
                                             </div>
                                             <div class="panel-body">
                                                 @endif
-                                                <a href="{{$chart->url}}">{{$chart->chartname}}</a><br>
+                                                <a href="{{$chart->url}}" target="_blank">{{$chart->chartname}}</a><br>
                                                 @if ($loop->last)
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@
                                             </div>
                                             <div class="panel-body">
                                                 @endif
-                                                <a href="{{$chart->url}}">{{$chart->chartname}}</a><br>
+                                                <a href="{{$chart->url}}" target="_blank">{{$chart->chartname}}</a><br>
                                                 @if ($loop->last)
                                             </div>
                                         </div>
