@@ -85,8 +85,8 @@ class SpiderIR extends Command
                     if (!$chart) { $chart = new Chart(); }
 
                     $chart->icao = $airport['icao'];
-                    $chart->airportname = $airport['name'];
-                    $chart->chartname = $chart_title;
+                    $chart->airportname = utf8_encode($airport['name']);
+                    $chart->chartname = utf8_encode($chart_title);
                     $chart->charttype = "General";
                     $chart->country = "IR";
 
