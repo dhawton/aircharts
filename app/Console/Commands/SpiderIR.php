@@ -75,7 +75,7 @@ class SpiderIR extends Command
                 } elseif (preg_match("!p class=MsoHeading7>(.+)!i", $line, $matches)) {
                     $chart_title = $matches[1];
                     $catch_rest = true;
-                } elseif (preg_match("(.+)</p>", $line, $matches) && $catch_rest) {
+                } elseif (preg_match("!(.+)</p>!i", $line, $matches) && $catch_rest) {
                     $chart_title .= $matches[1];
                     $catch_rest = false;
                 }
