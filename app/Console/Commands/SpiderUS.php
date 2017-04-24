@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Chart;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Storage;
 
 class SpiderUS extends Command
 {
@@ -40,7 +41,7 @@ class SpiderUS extends Command
     public function handle()
     {
         $nextdate = Storage::disk('local')->get('spider.us.date');
-        if ($nextdate != date("m/d/y")) return;
+        //if ($nextdate != date("m/d/y")) return;
 
         $airac = Storage::disk('local')->get('spider.us.airac');
         if (substr($airac, -2) == "13") {
