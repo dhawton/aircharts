@@ -72,9 +72,7 @@ class SpiderUS extends Command
                     $iata = $airport['apt_ident'];
                     $airport_name = $airport['ID'];
                     foreach($airport->record as $record) {
-                        $chart = Chart::where('chartname', $record->chart_name)->where(function ($query, $icao, $iata) {
-                            $query->where('icao', $icao)->orWhere('iata', $iata);
-                        });
+                        $chart = Chart::where('chartname', $record->chart_name)->where('icao', $icao)->orWhere('iata', $iata)->first();
                         if (!$chart) {
                             $chart = new Chart();
                         }
