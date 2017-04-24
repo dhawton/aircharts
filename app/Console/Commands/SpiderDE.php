@@ -70,7 +70,7 @@ class SpiderDE extends Command
             } else {
                 $chart->charttype = "General";
             }
-            $chart->url = $d[URL];
+            $chart->url = $d[CHART_URL];
             $chart->id = sha1("de." . $chart->icao . ",." . $d[CHART_NAME]);
             $chart->save();
         }
