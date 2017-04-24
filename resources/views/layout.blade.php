@@ -21,9 +21,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" href="/">AirCharts</a>
         </div>
-
-        <a class="navbar-brand" href="/">AirCharts</a>
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
