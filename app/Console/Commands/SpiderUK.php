@@ -41,6 +41,15 @@ class SpiderUK extends Command
      */
     public function handle()
     {
+        $options = array(
+            'http'=>array(
+                'method'=>"GET",
+                'header'=>"Accept-language: en\r\n" .
+                    "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad
+            )
+        );
+        $context = stream_context_create($options);
+
         $x = 0; // For testing purposes, only do ~10 charts.
         $index = file($this->base_url . $this->index_url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
         foreach ($index as $index_line) {
@@ -82,7 +91,7 @@ class SpiderUK extends Command
                         $chart->airportname = $name;
                         $chart->chartname = $chartname;
                         $chart->charttype = $charttype;
-                        \Storage::disk('s3')->put("/uk/" . $chart->id . ".pdf", file_get_contents($charturl), "public");
+                        \Storage::disk('s3')->put("/uk/" . $chart->id . ".pdf", file_get_contents($charturl, false, $context), "public");
                         $chart->url = "http://awsir.aircharts.org/uk/" . $chart->id . ".pdf";
                         $chart->save();
                         $x++;
