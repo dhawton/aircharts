@@ -49,29 +49,30 @@ class SpiderFR extends Command
                 $url = $matches[1];
                 $icao = $matches[2];
                 $chartname = $matches[3];
+
+                if (preg_match("!SID!", $chartname)) {
+                    $charttype = "SID";
+                    $chartname = str_replace("SID ", "", $chartname);
+                }
+                elseif (preg_match("!STAR!", $chartname)) {
+                    $charttype = "STAR";
+                    $chartname = str_replace("STAR ", "", $chartname);
+                }
+                elseif (preg_match("!IAC!", $chartname)) {
+                    $charttype = "Approach";
+                    $chartname = str_replace("IAC ", "", $chartname);
+                }
+                else {
+                    $charttype = "General";
+                }
+
                 $chart = Chart::where('icao',$icao)->where('chartname', $chartname)->first();
                 if (!$chart) { $chart = new Chart(); }
 
                 $chart->icao = $icao;
                 $chart->country = "FR";
                 $chart->url = $url;
-
-                if (preg_match("!SID!", $chartname)) {
-                    $chart->charttype = "SID";
-                    $chartname = str_replace("SID ", "", $chartname);
-                }
-                elseif (preg_match("!STAR!", $chartname)) {
-                    $chart->charttype = "STAR";
-                    $chartname = str_replace("STAR ", "", $chartname);
-                }
-                elseif (preg_match("!IAC!", $chartname)) {
-                    $chart->charttype = "Approach";
-                    $chartname = str_replace("IAC ", "", $chartname);
-                }
-                else {
-                    $chart->charttype = "General";
-                }
-
+                $chart->charttype = $charttype;
                 $chart->chartname = $chartname;
 
                 $airport = Airport::where('id', $icao)->first();
