@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\UpdateVATSIM::class,
         Commands\SpiderUS::class,
+        Commands\MakeCache::class,
     ];
 
     /**
@@ -28,6 +29,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('UpdateVATSIM')->everyMinute();
+
+        $schedule->command('spider:us')->dailyAt('01:00');
+
+        $schedule->command('airport:cache')->dailyAt('09:00');
     }
 
     /**
