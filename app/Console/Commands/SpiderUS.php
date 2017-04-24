@@ -51,6 +51,7 @@ class SpiderUS extends Command
         }
 
         $xml = file_get_contents("http://155.178.201.160/d-tpp/$airac/xml_data/d-TPP_Metafile.xml");
+        $xml = str_replace("version=\"1.1\"", "version=\"1.0\"", $xml);
         $xml = simplexml_load_string($xml);
 
         // Current Cycle
