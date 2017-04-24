@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\UpdateVATSIM::class,
+        Commands\SpiderDE::class,
         Commands\SpiderFR::class,
         Commands\SpiderUK::class,
         Commands\SpiderUS::class,
@@ -32,6 +33,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->command('UpdateVATSIM')->everyMinute();
 
+        $schedule->command('spider:de')->dailyAt('00:00');
+        $schedule->command("spider:fr")->dailyAt("02:00");
         $schedule->command('spider:us')->dailyAt('01:00');
         $schedule->command('spider:uk')->monthlyOn(1, '01:30');
 
