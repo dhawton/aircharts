@@ -35,7 +35,7 @@ $(document).ready(function () {
                 $('#chartbox').html('<div class="text-error">Error processing your request</div>');
             }
         });
-        $('.btnchart').click(function(){
+        $('.chartbox').on('click', '.btnchart', function() {
             var href = $(this).data("href");
             $('#searchrow').hide();
             $('#pdfclowrow').show();
