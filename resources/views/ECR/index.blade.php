@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <form class="form form-inline">
                     <div class="form-group">
-                        <input type="text" id="searchbox" placeholder="Chart Search">
+                        <input type="text" id="searchbox" placeholder="Chart Search" class="form-control">
                     </div>
                     <button type="button" class="btn btn-success" id="btnSearch">Search</button>
                 </form>
