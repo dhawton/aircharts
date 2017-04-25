@@ -28,6 +28,13 @@ $(document).ready(function() {
         });
         return false;
     });
+    $('#searchbox').on('keyup', function(e) {
+        if (e.keyCode == 13) {
+            $('#btnSearch').click();
+            e.preventDefault();
+            return false;
+        }
+    });
 });
 
 var waitingDialog = waitingDialog || (function ($) {
