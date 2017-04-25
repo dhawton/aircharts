@@ -11,6 +11,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 var oldtype = null;
+                dump(data);
                 html = "<h2>" + data.info.icao + "/" + data.info.iata + " - " + data.info.name + "</h2>";
                 $.each(data.charts, function() {
                     if (oldtype != this.type) {
@@ -98,3 +99,15 @@ var waitingDialog = waitingDialog || (function ($) {
         };
 
     })(jQuery);
+function dump(v) {
+    switch (typeof v) {
+        case "object":
+            for (var i in v) {
+                console.log(i+":"+v[i]);
+            }
+            break;
+        default: //number, string, boolean, null, undefined
+            console.log(typeof v+":"+v);
+            break;
+    }
+}
