@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .btnchart { padding-bottom: 5px; }
+        .btnchart { margin-bottom: 5px; }
     </style>
 </head>
 <body>

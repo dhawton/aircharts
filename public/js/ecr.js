@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('#searchbox').focus();
     $('#btnSearch').click(function () {
         if ($('#searchbox').val().length > 4) {
             bootbox.alert("Invalid Airport Identifier in search box.  One FAA Identifier or ICAO Identifier only.");
