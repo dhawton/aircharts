@@ -1,6 +1,6 @@
 function showPDF(href) {
     $('#searchrow').hide();
-    $('#pdfclowrow').show();
+    $('#pdfcloserow').show();
     $('#chartbox').hide();
     $('#pdfbox').show();
     $('#pdfbox').html("<object data=\"" + href + "\" type=\"application/pdf\" class=\"col-md-12\" height=\"100%\">alt: <a href=\"" + href + "\" target='_blank'>open pdf</a></object>");

@@ -16,7 +16,7 @@
         </div>
         <div class="row" id="pdfcloserow" style="display: none;"><button type="button" class="btn btn-danger btnclosepdf">Close</button></div>
         <div class="row" id="chartbox"></div>
-        <div class="row" id="pdfbox" style="display:none;"></div>
+        <div class="row" id="pdfbox" style="display: none;"></div>
     </div>
 @endsection
 @section('js')
