@@ -23,7 +23,7 @@ $(document).ready(function () {
                             html = html + "<h4>" + this.type + "</h4>";
                             oldtype = this.type; x = 0;
                         }
-                        html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button><br>";
+                        html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\">" + this.name + "</button><br>";
                     });
                 });
                 html = html + "</center>";
@@ -34,6 +34,21 @@ $(document).ready(function () {
                 waitingDialog.hide();
                 $('#chartbox').html('<div class="text-error">Error processing your request</div>');
             }
+        });
+        $('.btnchart').click(function(){
+            var href = $(this).data("href");
+            $('#searchrow').hide();
+            $('#pdfclowrow').show();
+            $('#chartbox').hide();
+            $('#pdfbox').show();
+            $('#pdfbox').html("<object data=\"" + href + "\" type=\"application/pdf\" class=\"col-md-12\" height=\"100%\">alt: <a href=\"" + href + "\" target='_blank'>open pdf</a></object>");
+        });
+        $('.btnclosepdf').click(function() {
+            $('#pdfbox').html("");
+            $('#pdfbox').hide();
+            $('#chartbox').show();
+            $('#pdfcloserow').hide();
+            $('#searchrow').show();
         });
         return false;
     });

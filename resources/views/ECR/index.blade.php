@@ -4,7 +4,7 @@
         <div class="row text-center ">
             <h2>AirCharts ECR</h2>
         </div>
-        <div class="row">
+        <div class="row" id="searchrow">
             <div class="col-md-12 text-center">
                 <div class="form form-inline">
                     <div class="form-group">
@@ -14,7 +14,9 @@
                 </div>
             </div>
         </div>
+        <div class="row" id="pdfcloserow" style="display: none;"><button type="button" class="btn btn-danger btnclosepdf">Close</button></div>
         <div class="row" id="chartbox"></div>
+        <div class="row" id="pdfbox" style="display:none;"></div>
     </div>
 @endsection
 @section('js')
