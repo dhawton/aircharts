@@ -11,6 +11,9 @@ Route::group(['domain' => 'www.aircharts.org'], function () {
     });
 
     Route::get('view/{id}', 'ACController@getView');
+
+    Route::get('about', function() { return view('about'); });
+    Route::get('about/ecr', function() { return view('ecr'); });
 });
 
 Route::group(['middleware' => 'api', 'domain' => 'api.aircharts.org'], function () {
