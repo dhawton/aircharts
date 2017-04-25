@@ -2,10 +2,10 @@
 @section("content")
     <div class="container">
         <div class="row text-center ">
-            <h2>AirCharts</h2>
+            <h2>AirCharts ECR</h2>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <form class="form form-inline">
                     <div class="form-group">
                         <input type="text" id="searchbox" placeholder="Chart Search" class="form-control">
