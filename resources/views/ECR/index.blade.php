@@ -1,4 +1,4 @@
-@extends('ecr.layout')
+@extends('ECR.layout')
 @section("content")
     <div class="container">
         <div class="row text-center ">
