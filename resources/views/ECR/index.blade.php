@@ -6,12 +6,12 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <form class="form form-inline">
+                <div class="form form-inline">
                     <div class="form-group">
                         <input type="text" id="searchbox" placeholder="Chart Search" class="form-control">
                     </div>
                     <button type="button" class="btn btn-success" id="btnSearch">Search</button>
-                </form>
+                </div>
             </div>
         </div>
         <div class="row" id="chartbox"></div>
