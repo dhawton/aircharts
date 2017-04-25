@@ -13,8 +13,8 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 var oldtype = null;
-                dump(data);
                 $.each(data, function () {
+                    dump(data);
                     html = "<h2>" + data.info.icao + "/" + data.info.iata + " - " + data.info.name + "</h2>";
                     $.each(data.charts, function () {
                         if (oldtype != this.type) {
