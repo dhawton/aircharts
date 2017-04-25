@@ -1,6 +1,6 @@
 @extends('ECR.layout')
 @section("content")
-    <div class="container-fluid">
+    <div class="container">
         <div class="row text-center ">
             <h2>AirCharts ECR</h2>
         </div>
