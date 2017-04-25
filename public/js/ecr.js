@@ -22,7 +22,7 @@ $(document).ready(function () {
                             html = html + "<h4>" + this.type + "</h4>";
                             oldtype = this.type;
                         }
-                        html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button>";
+                        html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button>&nbsp;";
                     });
                 });
                 $('#chartbox').html(html);

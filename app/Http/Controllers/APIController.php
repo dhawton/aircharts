@@ -24,7 +24,7 @@ class APIController extends Controller
         $output = [];
         for($i = 0 ; isset($list[$i]) ; $i++) {
             $airportdef = false; $id = $list[$i];
-            foreach (Chart::where('icao', $list[$i])->orWhere('iata', $list[$i])->orderByRaw('FIELD(charttype, "General", "SID", "STAR", "Intermediate", "Approach")')->get() as $chart) {
+            foreach (Chart::where('icao', $list[$i])->orWhere('iata', $list[$i])->orderByRaw('FIELD(charttype, "General", "SID", "STAR", "Intermediate", "Approach")')->orderBy('chartname')->get() as $chart) {
                 if (!$airportdef) {
                     $output[$id]['info'] = [
                         'icao' => $chart->icao,
