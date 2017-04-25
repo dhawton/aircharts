@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Chart;
 use App\Models\Airport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ACController extends Controller
 {
@@ -35,5 +36,16 @@ class ACController extends Controller
         }
 
         return view('charts', ['error' => $errors, 'results' => $results]);
+    }
+
+    public function getView($id) {
+        $chart = Chart::find($id);
+        if (!$chart) abort(404);
+
+        $filename = $id . ".pdf";
+        return Response::make(file_get_contents($chart->url), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $filename . '"'
+        ]);
     }
 }

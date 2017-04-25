@@ -3,7 +3,7 @@ function showPDF(href) {
     $('#pdfcloserow').show();
     $('#chartbox').hide();
     $('#pdfbox').show();
-    $('#pdfbox').html("<object data=\"" + href + "\" type=\"application/pdf\" class=\"col-md-12\" height=\"100%\">alt: <a href=\"" + href + "\" target='_blank'>open pdf</a></object>");
+    $('#pdfbox').html("<object data=\"https://www.aircharts.org/view/" + href + "\" type=\"application/pdf\" class=\"col-md-12\" height=\"100%\">alt: <a href=\"https://www.aircharts.org/view/" + href + "\" target='_blank'>open pdf</a></object>");
 }
 
 $(document).ready(function () {
@@ -31,7 +31,7 @@ $(document).ready(function () {
                             html = html + "<h4>" + this.type + "</h4>";
                             oldtype = this.type; x = 0;
                         }
-                        html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.url + "\");'>" + this.name + "</button><br>";
+                        html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
                     });
                 });
                 html = html + "</center>";
