@@ -12,7 +12,7 @@ $(document).ready(function () {
             url: "https://api.aircharts.org/Airport/" + $('#searchbox').val(),
             dataType: 'json',
             success: function (data) {
-                var oldtype = null;
+                var oldtype = null; var x = 0;
                 $.each(data, function() {
                     html = "<h2>" + this.info.icao;
                     if (this.info.iata) { html = html + "/" + this.info.iata; }
@@ -20,9 +20,11 @@ $(document).ready(function () {
                     $.each(this.charts, function () {
                         if (oldtype != this.type) {
                             html = html + "<h4>" + this.type + "</h4>";
-                            oldtype = this.type;
+                            oldtype = this.type; x = 0;
                         }
-                        html = html + "<button class=\"btn btn-primary btnchart text-center col-sm-2\" data-href=\"" + this.url + "\"'>" + this.name + "</button>&nbsp;";
+                        html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button>&nbsp;";
+                        x = x + 1;
+                        if (x == 4) { html = html + "<br>"; x = 0; }
                     });
                 });
                 $('#chartbox').html(html);
