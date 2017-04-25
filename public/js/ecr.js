@@ -3,7 +3,7 @@ function showPDF(href) {
     $('#pdfcloserow').show();
     $('#chartbox').hide();
     $('#pdfbox').show();
-    $('#pdfbox').html("<object data=\"https://www.aircharts.org/view/" + href + "\" type=\"application/pdf\" class=\"col-md-12\" height=\"100%\">alt: <a href=\"https://www.aircharts.org/view/" + href + "\" target='_blank'>open pdf</a></object>");
+    $('#pdfbox').html("<object data=\"https://www.aircharts.org/view/" + href + "\" type=\"application/pdf\" class=\"col-md-12\" style=\"height: 500px\">alt: <a href=\"https://www.aircharts.org/view/" + href + "\" target='_blank'>open pdf</a></object>");
 }
 
 $(document).ready(function () {

@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" id="pdfcloserow" style="display: none;"><button type="button" class="btn btn-danger btnclosepdf">Close</button></div>
+        <div class="row" id="pdfcloserow" style="display: none;"><div class="col-md-12 text-center"><button type="button" class="btn btn-danger btnclosepdf">Close PDF</button></div></div>
         <div class="row" id="chartbox"></div>
         <div class="row" id="pdfbox" style="display: none;"></div>
     </div>
