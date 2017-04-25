@@ -26,6 +26,7 @@ $(document).ready(function() {
                 $('#chartbox').html('<div class="text-error">Error processing your request</div>');
             }
         });
+        return false;
     });
 });
 
