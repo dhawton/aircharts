@@ -3,6 +3,8 @@
 Route::group(['domain' => 'www.aircharts.org'], function () {
     Route::get('/', 'ACController@getIndex');
 
+    Route::get('/ECR', 'ECRController@getIndex');
+
     Route::post('/charts', 'ACController@postCharts');
     Route::post('/deploy', function () {
         exec("cd /home/airchar1/ac2/aircharts3 && git pull");
