@@ -15,9 +15,11 @@ $(document).ready(function () {
                 var oldtype = null;
                 for (var key in data) {
                     if (!data.hasOwnProperty(key)) { continue; }
-                    dump(data);
-                    html = "<h2>" + data.info.icao + "/" + data.info.iata + " - " + data.info.name + "</h2>";
-                    $.each(data.charts, function () {
+                    dump(key);
+                    html = "<h2>" + key.info.icao;
+                    if (key.info.iata) { html = html + "/" + key.info.iata; }
+                    html = html + " - " + key.info.name + "</h2>";
+                    $.each(key.charts, function () {
                         if (oldtype != this.type) {
                             html = html + "<h4>" + this.type + "</h4>";
                         }
