@@ -16,7 +16,7 @@ $(document).ready(function () {
                 $.each(data, function() {
                     html = "<h2>" + this.info.icao;
                     if (this.info.iata) { html = html + "/" + this.info.iata; }
-                    html = html + " - " + this.info.name + "</h2>";
+                    html = html + " - " + this.info.name + "</h2><center>";
                     $.each(this.charts, function () {
                         if (oldtype != this.type) {
                             html = html + "<h4>" + this.type + "</h4>";
@@ -25,6 +25,7 @@ $(document).ready(function () {
                         html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button><br>";
                     });
                 });
+                html = html + "</center>";
                 $('#chartbox').html(html);
                 waitingDialog.hide();
             },
