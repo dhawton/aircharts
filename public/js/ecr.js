@@ -13,7 +13,8 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 var oldtype = null;
-                $.each(data, function () {
+                for (var key in data) {
+                    if (!data.hasOwnProperty(key)) { continue; }
                     dump(data);
                     html = "<h2>" + data.info.icao + "/" + data.info.iata + " - " + data.info.name + "</h2>";
                     $.each(data.charts, function () {
@@ -22,7 +23,7 @@ $(document).ready(function () {
                         }
                         html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button>";
                     });
-                });
+                };
                 $('#chartbox').html(html);
                 waitingDialog.hide();
             },
