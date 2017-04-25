@@ -1,39 +1,45 @@
-$(document).ready(function() {
-    $('#btnSearch').click(function() {
+$(document).ready(function () {
+    $('#btnSearch').click(function () {
         if ($('#searchbox').val().length > 4) {
             bootbox.alert("Invalid Airport Identifier in search box.  One FAA Identifier or ICAO Identifier only.");
             return false;
         }
+        $('#searchbox').val($('#searchbox').val().toUpperCase());
+        var icao = $('#searchbox').val();
         waitingDialog.show("Processing Request...");
         $.ajax({
             method: "GET",
             url: "https://api.aircharts.org/Airport/" + $('#searchbox').val(),
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var oldtype = null;
                 dump(data);
-                html = "<h2>" + data.info.icao + "/" + data.info.iata + " - " + data.info.name + "</h2>";
-                $.each(data.charts, function() {
-                    if (oldtype != this.type) {
-                        html = html + "<h4>" + this.type + "</h4>";
-                    }
-                    html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button>";
+                $.each(data, function () {
+                    html = "<h2>" + data.info.icao + "/" + data.info.iata + " - " + data.info.name + "</h2>";
+                    $.each(data.charts, function () {
+                        if (oldtype != this.type) {
+                            html = html + "<h4>" + this.type + "</h4>";
+                        }
+                        html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button>";
+                    });
                 });
                 $('#chartbox').html(html);
                 waitingDialog.hide();
             },
-            error: function() {
+            error: function () {
                 waitingDialog.hide();
                 $('#chartbox').html('<div class="text-error">Error processing your request</div>');
             }
         });
         return false;
     });
-    $('#searchbox').on('keyup', function(e) {
+    $('#searchbox').on('keyup', function (e) {
         if (e.keyCode == 13) {
             $('#btnSearch').click();
             e.preventDefault();
             return false;
+        } else {
+
         }
     });
 });
@@ -103,11 +109,11 @@ function dump(v) {
     switch (typeof v) {
         case "object":
             for (var i in v) {
-                console.log(i+":"+v[i]);
+                console.log(i + ":" + v[i]);
             }
             break;
         default: //number, string, boolean, null, undefined
-            console.log(typeof v+":"+v);
+            console.log(typeof v + ":" + v);
             break;
     }
 }
