@@ -13,19 +13,17 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 var oldtype = null;
-                for (var key in data) {
-                    if (!data.hasOwnProperty(key)) { continue; }
-                    dump(key);
-                    html = "<h2>" + key.info.icao;
-                    if (key.info.iata) { html = html + "/" + key.info.iata; }
-                    html = html + " - " + key.info.name + "</h2>";
-                    $.each(key.charts, function () {
+                $.each(data, function() {
+                    html = "<h2>" + this.info.icao;
+                    if (this.info.iata) { html = html + "/" + this.info.iata; }
+                    html = html + " - " + this.info.name + "</h2>";
+                    $.each(this.charts, function () {
                         if (oldtype != this.type) {
                             html = html + "<h4>" + this.type + "</h4>";
                         }
                         html = html + "<button class=\"btn btn-primary btnchart text-center\" data-href=\"" + this.url + "\"'>" + this.name + "</button>";
                     });
-                };
+                });
                 $('#chartbox').html(html);
                 waitingDialog.hide();
             },
