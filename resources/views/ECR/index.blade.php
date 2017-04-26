@@ -16,6 +16,7 @@
         </div>
         <div class="row" id="pdfcloserow" style="display: none;"><div class="col-md-12 text-center"><button type="button" class="btn btn-danger btnclosepdf">Close PDF</button></div></div>
         <div class="row" id="chartbox" style="display:none;">
+            <div class="col-md-12">
             <h2 id="airportinfo">&nbsp;</h2>
             <ul class="nav nav-pills">
                 <li class="active">
@@ -32,6 +33,7 @@
                 <div class="tab-pane" id="star"></div>
                 <div class="tab-pane" id="arr"></div>
                 <div class="tab-pane" id="iap"></div>
+            </div>
             </div>
         </div>
         <div class="row" id="pdfbox" style="display: none;"></div>
