@@ -21,7 +21,6 @@ class APIv2Controller extends Controller
         }
 
         $output = [
-            'status' => 'ok',
         ];
         foreach($aps as $ap) {
             $airport = Airport::where('id', $ap)->first();
