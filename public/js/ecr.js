@@ -23,6 +23,10 @@ $(document).ready(function () {
             success: function (data) {
                 $.each(data, function() {
                     console.log(dump(this));
+                    if (typeof this == "string") {
+                        bootbox.prompt("No charts found.  If the airport has an ICAO identifier, are you using it?");
+                        return;
+                    }
                     if (typeof this == "object") {
                         $('#airportinfo').html(this.info.id + " - " + this.info.name);
                         var html = "";
