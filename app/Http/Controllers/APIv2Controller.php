@@ -38,7 +38,7 @@ class APIv2Controller extends Controller
             ];
             $groups = ['General','SID','STAR','Intermediate','Approach'];
             foreach($groups as $group) {
-                $charts = Chart::where('icao',$airport->id)->orWhere('iata',$airport->id)->where('charttype',$group)->orderBy('chartname')->get();
+                $charts = Chart::where('icao',$airport->id)->where('charttype',$group)->orderBy('chartname')->get();
                 foreach($charts as $chart) {
                     $output[$ap]["charts"][$group][] = [
                         'id' => $chart->id,
