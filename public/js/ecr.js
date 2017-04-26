@@ -23,7 +23,7 @@ $(document).ready(function () {
             success: function (data) {
                 $.each(data, function() {
                     if (this == "Not Found") {
-                        bootbox.prompt("No charts found.  If the airport has an ICAO identifier, are you using it?");
+                        bootbox.alert("No charts found.  If the airport has an ICAO identifier, are you using it?");
                         $('#chartbox').hide();
                         return;
                     }
