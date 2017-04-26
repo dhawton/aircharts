@@ -24,7 +24,7 @@ class APIv2Controller extends Controller
             'status' => 'ok',
         ];
         foreach($aps as $ap) {
-            $airport = Airport::where('icao', $ap)->first();
+            $airport = Airport::where('id', $ap)->first();
             if (!$airport) {
                 $output[$ap] = "Not Found";
                 continue;
