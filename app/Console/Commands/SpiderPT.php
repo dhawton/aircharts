@@ -53,7 +53,7 @@ class SpiderPT extends Command
                 if (!$chart) { $chart = new Chart(); }
 
                 if (!isset($airports[$icao])) {
-                    $airport = Airport::where('icao', $icao)->first();
+                    $airport = Airport::where('id', $icao)->first();
                     $airports[$icao] = $airport->name;
                 }
                 $chart->id = sha1("pt.$icao,.$chart_name");
