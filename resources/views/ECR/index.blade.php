@@ -28,10 +28,10 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="gen"></div>
-                <div class="tab-pane active" id="sid"></div>
-                <div class="tab-pane active" id="star"></div>
-                <div class="tab-pane active" id="arr"></div>
-                <div class="tab-pane active" id="iap"></div>
+                <div class="tab-pane" id="sid"></div>
+                <div class="tab-pane" id="star"></div>
+                <div class="tab-pane" id="arr"></div>
+                <div class="tab-pane" id="iap"></div>
             </div>
         </div>
         <div class="row" id="pdfbox" style="display: none;"></div>
