@@ -26,7 +26,7 @@
                 <li><a href="#star" data-toggle="tab">STAR</a></li>
                 <li><a href="#arr" data-toggle="tab">Int</a></li>
                 <li><a href="#iap" data-toggle="tab">App</a></li>
-            </ul>
+            </ul><br>
             <div class="tab-content">
                 <div class="tab-pane active" id="gen"></div>
                 <div class="tab-pane" id="sid"></div>
