@@ -22,9 +22,9 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 $.each(data, function() {
-                    console.log(dump(this));
-                    if (typeof this == "string") {
+                    if (this == "Not Found") {
                         bootbox.prompt("No charts found.  If the airport has an ICAO identifier, are you using it?");
+                        $('#chartbox').hide();
                         return;
                     }
                     if (typeof this == "object") {
@@ -54,9 +54,9 @@ $(document).ready(function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
                         $('#iap').html((html) ? html : "None available");
+                        $('#chartbox').show();
                     }
                 });
-                $('#chartbox').show();
                 waitingDialog.hide();
             },
             error: function () {
