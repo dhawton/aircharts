@@ -52,7 +52,8 @@ class SpiderRU extends Command
 
                 if (!isset($airports[$icao])) {
                     $airport = Airport::where('id', $icao)->first();
-                    $airports[$icao] = $airport->name;
+                    if (!$airport) { $airports[$icao] = "Unknown"; echo "Unknown Airport Encountered, $icao"; }
+                    else { $airports[$icao] = $airport->name; }
                 }
 
                 $chart = Chart::where('icao', $icao)->where('chartname', $chart_name)->first();
