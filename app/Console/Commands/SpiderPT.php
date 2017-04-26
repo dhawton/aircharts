@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Chart;
+use Carbon\Carbon;
 use App\Models\Airport;
 use Illuminate\Console\Command;
 

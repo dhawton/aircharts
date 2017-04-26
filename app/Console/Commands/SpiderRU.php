@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Chart;
 use App\Models\Airport;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class SpiderRU extends Command
