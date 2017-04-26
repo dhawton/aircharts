@@ -25,27 +25,27 @@ $(document).ready(function () {
                     if (typeof this == "object") {
                         $('#airportinfo').html(this.info.id + " - " + this.info.name);
                         var html = "";
-                        $.each(this.General, function () {
+                        $.each(this.charts.General, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
                         });
                         $('#gen').html(html);
                         var html = "";
-                        $.each(this.SID, function () {
+                        $.each(this.charts.SID, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
                         });
                         $('#sid').html(html);
                         var html = "";
-                        $.each(this.STAR, function () {
+                        $.each(this.charts.STAR, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
                         });
                         $('#star').html(html);
                         var html = "";
-                        $.each(this.Intermediate, function () {
+                        $.each(this.charts.Intermediate, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
                         });
                         $('#arr').html(html);
                         var html = "";
-                        $.each(this.Approach, function () {
+                        $.each(this.charts.Approach, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
                         });
                         $('#app').html(html);
