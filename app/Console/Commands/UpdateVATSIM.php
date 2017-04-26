@@ -148,7 +148,11 @@ class UpdateVATSIM extends Command
 
             $new = 0;
             $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->orderBy("created_at", "DESC")->first();
-            if (!$flight || ($flight->status == "Arrived" && $flight->checkArrival())) {
+            if (!$flight || ($flight->status == "Arrived" && !$flight->checkArrival())) {
+                // Ignore the flight unless they are not airborne and are within their departure airport
+                if ($flight->airborne && !$flight->checkDeparture()) {
+                    continue;
+                }
                 $new = 1;
                 $flight = new Flight();
 

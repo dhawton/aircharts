@@ -39,7 +39,7 @@ class APIv2Controller extends Controller
             foreach($groups as $group) {
                 $charts = Chart::where(function ($query) use ($ap) {
                     $query->where('icao', $ap);
-                    $query->orWhere('iata', $ap);
+//                    $query->orWhere('iata', $ap);
                 })->where('charttype',$group)->orderBy('chartname')->get();
                 foreach($charts as $chart) {
                     $output[$ap]["charts"][$group][] = [
