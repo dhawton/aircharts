@@ -15,7 +15,25 @@
             </div>
         </div>
         <div class="row" id="pdfcloserow" style="display: none;"><div class="col-md-12 text-center"><button type="button" class="btn btn-danger btnclosepdf">Close PDF</button></div></div>
-        <div class="row" id="chartbox"></div>
+        <div class="row" id="chartbox" style="display:none;">
+            <h2 id="airportinfo">&nbsp;</h2>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#gen" data-toggle="tab">Gen</a>
+                </li>
+                <li><a href="#sid" data-toggle="tab">SID</a></li>
+                <li><a href="#star" data-toggle="tab">STAR</a></li>
+                <li><a href="#arr" data-toggle="tab">Int</a></li>
+                <li><a href="#iap" data-toggle="tab">App</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="gen"></div>
+                <div class="tab-pane active" id="sid"></div>
+                <div class="tab-pane active" id="star"></div>
+                <div class="tab-pane active" id="arr"></div>
+                <div class="tab-pane active" id="iap"></div>
+            </div>
+        </div>
         <div class="row" id="pdfbox" style="display: none;"></div>
     </div>
 @endsection

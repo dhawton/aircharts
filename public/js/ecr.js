@@ -3,7 +3,7 @@ function showPDF(href) {
     $('#pdfcloserow').show();
     $('#chartbox').hide();
     $('#pdfbox').show();
-    $('#pdfbox').html("<object data=\"https://www.aircharts.org/view/" + href + "#view=FitH\" type=\"application/pdf\" class=\"col-md-12\" style=\"height: 750px\">alt: <a href=\"https://www.aircharts.org/view/" + href + "\" target='_blank'>open pdf</a></object>");
+    $('#pdfbox').html("<object data=\"https://www.aircharts.org/view/" + href + "#view=FitH\" type=\"application/pdf\" class=\"col-md-12\" style=\"width: 100%; height: 750px\">alt: <a href=\"https://www.aircharts.org/view/" + href + "\" target='_blank'>open pdf</a></object>");
 }
 
 $(document).ready(function () {
@@ -18,29 +18,45 @@ $(document).ready(function () {
         waitingDialog.show("Processing Request...");
         $.ajax({
             method: "GET",
-            url: "https://api.aircharts.org/Airport/" + $('#searchbox').val(),
+            url: "https://api.aircharts.org/v2/Airport/" + $('#searchbox').val(),
             dataType: 'json',
             success: function (data) {
-                var oldtype = null;
                 $.each(data, function() {
-                    html = "<h2>" + this.info.icao;
-                    if (this.info.iata) { html = html + "/" + this.info.iata; }
-                    html = html + " - " + this.info.name + "</h2><center>";
-                    $.each(this.charts, function () {
-                        if (oldtype != this.type) {
-                            html = html + "<h4>" + this.type + "</h4>";
-                            oldtype = this.type; x = 0;
-                        }
-                        html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
-                    });
+                    if (typeof this == object) {
+                        $('#airportinfo').html(this.info.id + " - " + this.info.name);
+                        var html = "";
+                        $.each(this.General, function () {
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                        });
+                        $('#gen').html(html);
+                        var html = "";
+                        $.each(this.SID, function () {
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                        });
+                        $('#sid').html(html);
+                        var html = "";
+                        $.each(this.STAR, function () {
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                        });
+                        $('#star').html(html);
+                        var html = "";
+                        $.each(this.Intermediate, function () {
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                        });
+                        $('#arr').html(html);
+                        var html = "";
+                        $.each(this.Approach, function () {
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                        });
+                        $('#app').html(html);
+                    }
                 });
-                html = html + "</center>";
-                $('#chartbox').html(html);
+                $('#chartbox').show();
                 waitingDialog.hide();
             },
             error: function () {
                 waitingDialog.hide();
-                $('#chartbox').html('<div class="text-error">Error processing your request</div>');
+                bootbox.alert("There was an error processing your request");
             }
         });
 
