@@ -46,9 +46,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('spider:hu')->dailyAt('02:30');
         $schedule->command('spider:ir')->dailyAt('03:00');
         $schedule->command('spider:pl')->weeklyOn(1,'03:40');
+        $schedule->command("spider:pt")->monthlyOn(5, '01:30');
         $schedule->command('spider:us')->dailyAt('01:00');
         $schedule->command('spider:uk')->monthlyOn(1, '01:30');
-
+        
         $schedule->command('airport:cache')->dailyAt('09:00');
     }
 
