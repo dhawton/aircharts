@@ -19,4 +19,5 @@ Route::group(['domain' => 'www.aircharts.org'], function () {
 Route::group(['middleware' => 'api', 'domain' => 'api.aircharts.org'], function () {
     Route::get('/', function() { echo "Coming soon"; });
     Route::get('/Airport/{data}', 'APIController@getAirport');
+    Route::get('v2/Airport/{data}', 'APIv2Controller@getAirport');
 });
