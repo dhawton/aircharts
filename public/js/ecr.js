@@ -22,7 +22,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 $.each(data, function() {
-                    if (typeof this == object) {
+                    if (typeof this == "object") {
                         $('#airportinfo').html(this.info.id + " - " + this.info.name);
                         var html = "";
                         $.each(this.General, function () {
