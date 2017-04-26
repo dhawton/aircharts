@@ -46,7 +46,7 @@ class SpiderHK extends Command
         $in_charts = 0;
         $icao = $airportname = null;
         foreach ($data as $line) {
-            if (preg_match("!openBrWindow('(AIP/AD/HK_AD2\-[^\"]+\.pdf)\'[^>]*>AD 2-[0-9A-Z]+ ([^<]+)<\/a>!i", $line, $matches)) {
+            if (preg_match("!openBrWindow\('(AIP/AD/HK_AD2\-[^\"]+\.pdf)\'\)[^>]*>AD 2-[0-9A-Z]+ ([^<]+)<\/a>!i", $line, $matches)) {
                 $icao = "VHHH";
                 $airportname = "Hong Kong International";
                 $url = $this->base_url . $matches[1];
