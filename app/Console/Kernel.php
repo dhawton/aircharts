@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         Commands\SpiderCH::class,           // Switzerland
         Commands\SpiderDE::class,           // Germany
         Commands\SpiderFR::class,           // France
+        Commands\SpiderHK::class,           // Hong Kong
         Commands\SpiderHU::class,           // Hungary
         Commands\SpiderIR::class,           // Ireland
         Commands\SpiderPL::class,           // Poland
@@ -44,6 +45,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('spider:ch')->dailyAt('02:40');
         $schedule->command('spider:de')->dailyAt('00:00');
         $schedule->command("spider:fr")->dailyAt("02:00");
+        $schedule->command('spider:hk')->monthlyOn(21, '01:30');
         $schedule->command('spider:hu')->dailyAt('02:30');
         $schedule->command('spider:ir')->dailyAt('03:00');
         $schedule->command('spider:pl')->weeklyOn(1,'03:40');
