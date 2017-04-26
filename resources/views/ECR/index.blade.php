@@ -20,12 +20,12 @@
             <h2 id="airportinfo">&nbsp;</h2>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="#gen" data-toggle="tab">Gen</a>
+                    <a href="#gen" data-toggle="tab">General</a>
                 </li>
-                <li><a href="#sid" data-toggle="tab">SID</a></li>
-                <li><a href="#star" data-toggle="tab">STAR</a></li>
-                <li><a href="#arr" data-toggle="tab">Int</a></li>
-                <li><a href="#iap" data-toggle="tab">App</a></li>
+                <li><a href="#sid" data-toggle="tab">SIDs</a></li>
+                <li><a href="#star" data-toggle="tab">STARs</a></li>
+                <li><a href="#arr" data-toggle="tab">Intermediate</a></li>
+                <li><a href="#iap" data-toggle="tab">Approach</a></li>
             </ul><br>
             <div class="tab-content">
                 <div class="tab-pane active" id="gen"></div>
