@@ -17,7 +17,7 @@
         <div class="row" id="pdfcloserow" style="display: none;"><div class="col-md-12 text-center"><button type="button" class="btn btn-danger btnclosepdf">Close PDF</button></div></div>
         <div class="row" id="chartbox" style="display:none;">
             <h2 id="airportinfo">&nbsp;</h2>
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-pills">
                 <li class="active">
                     <a href="#gen" data-toggle="tab">Gen</a>
                 </li>
