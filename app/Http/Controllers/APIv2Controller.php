@@ -30,7 +30,7 @@ class APIv2Controller extends Controller
                 continue;
             }
             $output[$ap]['info'] = [
-                'id' => $airport->id,
+                'id' => $ap,
                 'name' => $airport->name,
                 'latitude' => $airport->lat,
                 'longitude' => $airport->lon,
