@@ -70,5 +70,10 @@ class SpiderPT extends Command
                 $chart->save();
             }
         }
+
+        // Clear out non-updated charts
+        foreach (Chart::where('country', 'PT')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
+            $chart->delete();
+        }
     }
 }

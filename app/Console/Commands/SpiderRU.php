@@ -60,16 +60,21 @@ class SpiderRU extends Command
                 if (!$chart) { $chart = new Chart(); }
                 $chart->id = sha1("ru.$icao,.$chart_name");
                 $chart->icao = $icao;
-                $chart->chartname = $chart_name;
+                $chart->chartname = utf8_encode($chart_name);
                 $chart->charttype = "General";
                 if (preg_match("!DEPARTURE!i", $chart_name)) { $chart->charttype = "SID"; }
                 if (preg_match("!ARRIVAL!i", $chart_name)) { $chart->charttype = "STAR"; }
                 if (preg_match("!APPROACH!i", $chart_name)) { $chart->charttype = "Approach"; }
                 $chart->url = $this->base_url . $url;
-                $chart->airportname = $airports[$icao];
+                $chart->airportname = utf8_encode($airports[$icao]);
                 $chart->country = "RU";
                 $chart->save();
             }
+        }
+
+        // Clear out non-updated charts
+        foreach (Chart::where('country', 'PT')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
+            $chart->delete();
         }
     }
 }

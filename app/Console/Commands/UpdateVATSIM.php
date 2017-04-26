@@ -131,7 +131,9 @@ class UpdateVATSIM extends Command
 
             if (!$in_clients || preg_match("/^;/", $line)) continue;
 
+
             $data = explode(":", $line);
+            if (!$data[cid]) continue;
             if($data[clienttype] == "ATC") continue;
             if(!$data[planned_depairport] || !$data[planned_destairport] || !$data[planned_route]) continue;
             if(!$data[latitude] || !$data[longitude]) continue;
