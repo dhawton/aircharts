@@ -28,27 +28,27 @@ $(document).ready(function () {
                         $.each(this.charts.General, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
-                        $('#gen').html(html);
+                        $('#gen').html((html) ? html : "None available");
                         var html = "";
                         $.each(this.charts.SID, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
-                        $('#sid').html(html);
+                        $('#sid').html((html) ? html : "None available");
                         var html = "";
                         $.each(this.charts.STAR, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
-                        $('#star').html(html);
+                        $('#star').html((html) ? html : "None available");
                         var html = "";
                         $.each(this.charts.Intermediate, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
-                        $('#arr').html(html);
+                        $('#arr').html((html) ? html : "None available");
                         var html = "";
                         $.each(this.charts.Approach, function () {
                             html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
-                        $('#iap').html(html);
+                        $('#iap').html((html) ? html : "None available");
                     }
                 });
                 $('#chartbox').show();

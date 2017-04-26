@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <style>
         .btnchart { margin-bottom: 5px; }
+        #searchbox { text-transform: uppercase; }
     </style>
 </head>
 <body>
