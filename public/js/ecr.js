@@ -26,29 +26,29 @@ $(document).ready(function () {
                         $('#airportinfo').html(this.info.id + " - " + this.info.name);
                         var html = "";
                         $.each(this.charts.General, function () {
-                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
                         $('#gen').html(html);
                         var html = "";
                         $.each(this.charts.SID, function () {
-                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
                         $('#sid').html(html);
                         var html = "";
                         $.each(this.charts.STAR, function () {
-                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
                         $('#star').html(html);
                         var html = "";
                         $.each(this.charts.Intermediate, function () {
-                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
                         $('#arr').html(html);
                         var html = "";
                         $.each(this.charts.Approach, function () {
-                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.name + "</button><br>";
+                            html = html + "<button class=\"btn btn-primary btnchart text-center\" onClick='showPDF(\"" + this.id + "\");'>" + this.chartname + "</button><br>";
                         });
-                        $('#app').html(html);
+                        $('#iap').html(html);
                     }
                 });
                 $('#chartbox').show();
