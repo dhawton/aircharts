@@ -32,6 +32,7 @@
         <div class="col-sm-12">
             <ul class="apinav nav nav-pills">
                 <li class="logo"><img src="https://www.aircharts.org/images/logo.png" alt="AirCharts"></li>
+                <li><a href="https://www.aircharts.org">Back to AirCharts.Org</a></li>
                 <li><a href="/">API Doc Home</a></li>
             </ul>
             <h1>AirCharts Public API Documentation</h1>
