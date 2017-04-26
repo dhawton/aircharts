@@ -58,6 +58,7 @@ class SpiderRU extends Command
                 $chart = Chart::where('icao', $icao)->where('chartname', $chart_name)->first();
                 if (!$chart) { $chart = new Chart(); }
                 $chart->id = sha1("ru.$icao,.$chart_name");
+                $chart->icao = $icao;
                 $chart->chartname = $chart_name;
                 $chart->charttype = "General";
                 if (preg_match("!DEPARTURE!i", $chart_name)) { $chart->charttype = "SID"; }
