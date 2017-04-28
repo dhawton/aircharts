@@ -22,10 +22,12 @@ class APIv2Controller extends Controller
 
         $output = [
         ];
+        $error = 0;
         foreach($aps as $ap) {
             $airport = Airport::where('id', $ap)->first();
             if (!$airport) {
                 $output[$ap] = "Not Found";
+                $error = 1;
                 continue;
             }
             $output[$ap]['info'] = [
@@ -50,6 +52,10 @@ class APIv2Controller extends Controller
                     ];
                 }
             }
+        }
+
+        if (count($aps) == 1 && $error) {
+            return response()->json($output, 404);
         }
 
         return response()->json($output);
