@@ -84,7 +84,7 @@ class APIv2Controller extends Controller
                 $query->where('icao', $ap);
             })->where('charttype', $group)->orderBy('chartname')->get();
             foreach ($charts as $chart) {
-                $output[$ap]["charts"][$group][] = [
+                $output["charts"][$group][] = [
                     'id' => $chart->id,
                     'chartname' => $chart->chartname,
                     'url' => $chart->url,
