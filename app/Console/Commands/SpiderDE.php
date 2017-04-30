@@ -53,7 +53,7 @@ class SpiderDE extends Command
 
             if (strtoupper($d[CHART_TYPE]) == "PACKAGE") continue;
 
-            $chart = Chart::where('icao', $d[ICAO])->where('chartname', $d[CHART_NAME])->first();
+            $chart = Chart::where('icao', $d[ICAO])->where('chartname', utf8_encode($d[CHART_NAME]))->first();
             if (!$chart) {
                 $chart = new Chart();
             }
