@@ -155,7 +155,6 @@ class UpdateVATSIM extends Command
                 }
                 $new = 1;
                 $flight = new Flight();
-
                 $flight->callsign = $data[callsign];
                 $flight->vatsim_id = $data[cid];
                 $flight->status = "Departing Soon";
@@ -181,6 +180,10 @@ class UpdateVATSIM extends Command
             $flight->departure = substr($data[planned_depairport], 0, 4);
             $flight->arrival = substr($data[planned_destairport], 0, 4);
             $flight->planned_alt = $data[planned_altitude];
+
+            if ($new == 1) {
+                if (!$flight->checkDeparture()) continue; // Skip non-departing flights
+            }
 
             // Check the status now
             if ($flight->status == "En-Route" && $flight->checkArrival()) {
