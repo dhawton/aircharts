@@ -206,13 +206,16 @@ class UpdateVATSIM extends Command
             $flight->missing_count = 0;
             $flight->save();
 
-            $position = new Positions();
-            $position->flight_id = $flight->id;
-            $position->lat = $data[latitude];
-            $position->lon = $data[longitude];
-            $position->alt = $data[altitude];
-            $position->spd = $data[groundspeed];
-            $position->save();
+            $pos = Positions::where('flight_id', $flight->id)->orderBy('created_at','DESC')->first();
+            if ($pos->created_at->diffInMins(\Carbon::now()) >= 10) {
+                $position = new Positions();
+                $position->flight_id = $flight->id;
+                $position->lat = $data[latitude];
+                $position->lon = $data[longitude];
+                $position->alt = $data[altitude];
+                $position->spd = $data[groundspeed];
+                $position->save();
+            }
         }
 
         foreach (Flight::where('status', 'NOT LIKE', 'Arrived')->where('last_update','<',$current_update)->get() as $flight) {
