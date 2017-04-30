@@ -214,6 +214,7 @@ class UpdateVATSIM extends Command
                 $position->lon = $data[longitude];
                 $position->alt = $data[altitude];
                 $position->spd = $data[groundspeed];
+                $position->hdg = $data[heading];
                 $position->save();
             }
         }
