@@ -18,7 +18,7 @@ class Flight extends Model {
         $arrap = Airport::find($this->arrival);
         if (!$arrap) return -1;
 
-        if (MathHelper::calc_distance($this->lat, $this->lon, $arrap->lat, $arrap->lon) < 15 && $this->alt < $arrap->elevation + 2000) {
+        if (MathHelper::calc_distance($this->lat, $this->lon, $arrap->lat, $arrap->lon) < 3 && $this->alt < $arrap->elevation + 500) {
             return true;
         }
         return false;
@@ -30,7 +30,7 @@ class Flight extends Model {
         $depap = Airport::find($this->departure);
         if (!$depap) return -1;
 
-        if (MathHelper::calc_distance($this->lat, $this->lon, $depap->lat, $depap->lon) < 5 && $this->alt < $depap->elevation + 2000)
+        if (MathHelper::calc_distance($this->lat, $this->lon, $depap->lat, $depap->lon) < 3 && $this->alt < $depap->elevation + 500)
             return true;
 
         return false;
