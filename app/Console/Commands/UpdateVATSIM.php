@@ -187,6 +187,7 @@ class UpdateVATSIM extends Command
 
             // Check the status now
             if ($flight->status == "En-Route" && $flight->checkArrival()) {
+              $flight->arrived_at = Carbon::now();
                 $flight->status = "Arrived";
             } elseif ($flight->status == "Unknown") {
                 // Check if at Departure Airport
@@ -200,6 +201,7 @@ class UpdateVATSIM extends Command
                     $flight->status = "Unknown";
                 }
             } elseif ($flight->status == "Departing Soon" && $flight->airborne()) {
+              $flight->departed_at = Carbon::now();
                 $flight->status = "En-Route";
             }
             $flight->last_update = $current_update;
