@@ -184,24 +184,24 @@ class UpdateVATSIM extends Command
             if ($new == 1) {
                 if (!$flight->checkDeparture()) continue; // Skip non-departing flights
             }
-
+            $changedstatus = 0;
             // Check the status now
             if ($flight->status == "En-Route" && $flight->checkArrival()) {
-              $flight->arrived_at = Carbon::now();
+              $flight->arrived_at = Carbon::now(); $changedstatus = 1;
                 $flight->status = "Arrived";
             } elseif ($flight->status == "Unknown") {
                 // Check if at Departure Airport
                 if ($flight->checkDeparture()) {
-                    $flight->status = "Departing Soon";
+                    $flight->status = "Departing Soon"; $changedstatus = 1;
                 } elseif ($flight->checkArrival()) {
-                    $flight->status = "Arrived";
+                    $flight->status = "Arrived"; $changedstatus = 1;
                 } elseif ($flight->airborne()) {
-                    $flight->status = "En-Route";
+                    $flight->status = "En-Route"; $changedstatus = 1;
                 } else {
-                    $flight->status = "Unknown";
+                    $flight->status = "Unknown"; $changedstatus = 1;
                 }
             } elseif ($flight->status == "Departing Soon" && $flight->airborne()) {
-              $flight->departed_at = Carbon::now();
+              $flight->departed_at = Carbon::now(); $changedstatus = 1;
                 $flight->status = "En-Route";
             }
             $flight->last_update = $current_update;
@@ -209,7 +209,7 @@ class UpdateVATSIM extends Command
             $flight->save();
 
             $pos = Positions::where('flight_id', $flight->id)->orderBy('created_at','DESC')->first();
-            if (($pos && $pos->created_at->diffInMinutes() >= 10) || !$pos) {
+            if (($pos && $pos->created_at->diffInMinutes() >= 5) || !$pos || $changedstatus) {
                 $position = new Positions();
                 $position->flight_id = $flight->id;
                 $position->lat = $data[latitude];
