@@ -210,7 +210,7 @@ class UpdateVATSIM extends Command
             $flight->save();
 
             $pos = Positions::where('flight_id', $flight->id)->orderBy('created_at','DESC')->first();
-            if (($pos && $pos->created_at->diffInMinutes() >= 5) || !$pos || $changedstatus) {
+            if (($pos && $pos->created_at->diffInMinutes() >= 2) || !$pos || $changedstatus) {
                 $position = new Positions();
                 $position->flight_id = $flight->id;
                 $position->lat = $data[latitude];
