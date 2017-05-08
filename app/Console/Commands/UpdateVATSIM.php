@@ -209,8 +209,16 @@ class UpdateVATSIM extends Command
             $flight->missing_count = 0;
             $flight->save();
 
+            if ($flight->spd > 250) {
+              $interval = 2;
+            } elseif ($flight->spd > 100) {
+              $interval = 5;
+            } else {
+              $interval = 10;
+            }
+
             $pos = Positions::where('flight_id', $flight->id)->orderBy('created_at','DESC')->first();
-            if (($pos && $pos->created_at->diffInMinutes() >= 2) || !$pos || $changedstatus) {
+            if (($pos && $pos->created_at->diffInMinutes() >= $interval) || !$pos || $changedstatus) {
                 $position = new Positions();
                 $position->flight_id = $flight->id;
                 $position->lat = $data[latitude];
