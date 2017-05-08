@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Flight;
 use App\Models\Positions;
+use App\Models\VatsimName;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -226,6 +227,7 @@ class UpdateVATSIM extends Command
             $flight->save();
 
             if ($flight->missing_count >= 5) {
+                \DB::raw("DELETE FROM positions WHERE flight_id=" . $flight->id);
                 $flight->delete();
             }
         }
