@@ -13,10 +13,10 @@ class Flight extends Model {
 
     function checkArrival() {
         if ($this->arrival == "ZZZZ") {
-            return -1;
+            return false;
         }
         $arrap = Airport::find($this->arrival);
-        if (!$arrap) return -1;
+        if (!$arrap) return false;
 
         if (MathHelper::calc_distance($this->lat, $this->lon, $arrap->lat, $arrap->lon) < 3 && $this->alt < $arrap->elevation + 500) {
             return true;

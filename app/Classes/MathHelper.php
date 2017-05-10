@@ -19,6 +19,6 @@ class MathHelper
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
         $dist = acos($dist);
         $dist = rad2deg($dist);
-        return ($dist * 60 * 1.1515 * 0.8684);
+        return abs($dist * 60 * 1.1515 * 0.8684);
     }
 }
