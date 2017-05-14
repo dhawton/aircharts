@@ -10,7 +10,7 @@ class APIv2Controller extends Controller
 {
     public function getAirport($data)
     {
-        $data = str_replace(" ", "", $data);
+        $data = str_replace(" ", "", strtoupper($data));
         if (preg_match("![^A-Z,]+!", $data)) {
             return response()->json(['status' => 'error', 'msg' => 'Malformed Request'], 400);
         }

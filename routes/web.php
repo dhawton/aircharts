@@ -20,5 +20,5 @@ Route::group(['middleware' => 'api', 'domain' => 'api.aircharts.org'], function 
     Route::get('/', function() { return view('api'); });
     Route::get('/Airport/{data}', 'APIController@getAirport');
     Route::get('v2/Airport/{data}', 'APIv2Controller@getAirport');
-    Route::get('v2/Charts/{id}','APIv2Controller@getCharts')->where('id','[0-9A-Z]{3,4}');
+    Route::get('v2/Charts/{id}','APIv2Controller@getCharts')->where('id','[0-9A-Za-z]{3,4}');
 });
