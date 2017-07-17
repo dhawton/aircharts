@@ -8,3 +8,5 @@ Homestead.json
 Homestead.yaml
 .env
 public/pmadmin
+public/ECR
+public/ecrimages
