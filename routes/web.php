@@ -7,7 +7,7 @@ Route::group(['domain' => 'www.aircharts.org'], function () {
 
     Route::post('/charts', 'ACController@postCharts');
     Route::post('/deploy', function () {
-        exec("cd /home/airchar1/ac2/aircharts3 && git pull");
+        exec("cd /home/airchar1/aircharts3 && git pull");
     });
 
     Route::get('view/{id}', 'ACController@getView');
