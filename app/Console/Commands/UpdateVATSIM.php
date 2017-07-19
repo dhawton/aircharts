@@ -232,11 +232,12 @@ class UpdateVATSIM extends Command
             }
         }
 
-        foreach (Flight::where('status', 'NOT LIKE', 'Arrived')->where('last_update','<',$current_update)->get() as $flight) {
+        foreach (Flight::where('status', 'NOT LIKE', 'Arrived')->where('status', 'NOT LIKE', 'Incomplete')->where('last_update','<',$current_update)->get() as $flight) {
             $flight->missing_count += 1;
             $flight->save();
 
             if ($flight->missing_count >= 5) {
+                $flight->missing_count = 0;
                 $flight->status = 'Incomplete';
                 $flight->save();
             }
