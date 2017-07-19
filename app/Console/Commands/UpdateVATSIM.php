@@ -148,8 +148,10 @@ class UpdateVATSIM extends Command
             $data[planned_route] = preg_replace("/\s+/", " ", trim($data[planned_route])); // Remove extra spaces
 
             $new = 0;
-            $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->orderBy("created_at", "DESC")->first();
-            if (!$flight || ($flight->status == "Arrived" && !$flight->checkArrival())) {
+            $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->whereRaw('created_at <= DATE_SUB(NOW(), INTERVAL 24 HOUR)')->orderBy("created_at", "DESC")->first();
+            if (!$flight || ($flight->status == "Arrived" && !$flight->checkArrival()) ||
+                ($flight->status == 'Incomplete' && $flight->departure == substr($data[planned_depairport], 0, 4) &&
+                    $flight->arrival == substr($data[planned_destairport], 0, 4) && !$flight->checkDeparture())) {
                 // Ignore the flight unless they are not airborne and are within their departure airport
                 if ($flight && !$flight->checkDeparture()) {
                     continue;
@@ -187,10 +189,10 @@ class UpdateVATSIM extends Command
             }
             $changedstatus = 0;
             // Check the status now
-            if ($flight->status == "En-Route" && $flight->checkArrival()) {
-              $flight->arrived_at = Carbon::now(); $changedstatus = 1;
+            if (($flight->status == "En-Route" || $flight->status == 'Incomplete') && $flight->checkArrival()) {
+                $flight->arrived_at = Carbon::now(); $changedstatus = 1;
                 $flight->status = "Arrived";
-            } elseif ($flight->status == "Unknown") {
+            } elseif ($flight->status == "Unknown" || $flight->status == 'Incomplete') {
                 // Check if at Departure Airport
                 if ($flight->checkDeparture()) {
                     $flight->status = "Departing Soon"; $changedstatus = 1;
@@ -202,7 +204,7 @@ class UpdateVATSIM extends Command
                     $flight->status = "Unknown"; $changedstatus = 1;
                 }
             } elseif ($flight->status == "Departing Soon" && $flight->airborne()) {
-              $flight->departed_at = Carbon::now(); $changedstatus = 1;
+                $flight->departed_at = Carbon::now(); $changedstatus = 1;
                 $flight->status = "En-Route";
             }
             $flight->last_update = $current_update;
@@ -235,8 +237,8 @@ class UpdateVATSIM extends Command
             $flight->save();
 
             if ($flight->missing_count >= 5) {
-                \DB::raw("DELETE FROM positions WHERE flight_id=" . $flight->id);
-                $flight->delete();
+                $flight->status = 'Incomplete';
+                $flight->save();
             }
         }
     }
