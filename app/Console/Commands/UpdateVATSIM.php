@@ -149,7 +149,7 @@ class UpdateVATSIM extends Command
 
             $new = 0;
             $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->whereRaw('created_at <= DATE_SUB(NOW(), INTERVAL 24 HOUR)')->orderBy("created_at", "DESC")->first();
-            if ($flight->status == 'Incomplete' && $flight->departure == substr($data[planned_depairport], 0, 4) &&
+            if ($flight && $flight->status == 'Incomplete' && $flight->departure == substr($data[planned_depairport], 0, 4) &&
                     $flight->arrival == substr($data[planned_destairport], 0, 4) && !$flight->checkDeparture()) {
                 $new = 1;
                 $flight = new Flight();
