@@ -237,9 +237,13 @@ class UpdateVATSIM extends Command
             $flight->save();
 
             if ($flight->missing_count >= 5) {
-                $flight->missing_count = 0;
-                $flight->status = 'Incomplete';
-                $flight->save();
+                if ($flight->status == 'Departing Soon') {
+                    $flight->delete();
+                } else {
+                    $flight->missing_count = 0;
+                    $flight->status = 'Incomplete';
+                    $flight->save();
+                }
             }
         }
     }
