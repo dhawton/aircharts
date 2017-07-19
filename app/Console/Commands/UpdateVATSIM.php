@@ -149,9 +149,14 @@ class UpdateVATSIM extends Command
 
             $new = 0;
             $flight = Flight::where('callsign', $data[callsign])->where('vatsim_id', $data[cid])->whereRaw('created_at <= DATE_SUB(NOW(), INTERVAL 24 HOUR)')->orderBy("created_at", "DESC")->first();
-            if (!$flight || ($flight->status == "Arrived" && !$flight->checkArrival()) ||
-                ($flight->status == 'Incomplete' && $flight->departure == substr($data[planned_depairport], 0, 4) &&
-                    $flight->arrival == substr($data[planned_destairport], 0, 4) && !$flight->checkDeparture())) {
+            if ($flight->status == 'Incomplete' && $flight->departure == substr($data[planned_depairport], 0, 4) &&
+                    $flight->arrival == substr($data[planned_destairport], 0, 4) && !$flight->checkDeparture()) {
+                $new = 1;
+                $flight = new Flight();
+                $flight->callsign = $data[callsign];
+                $flight->vatsim_id = $data[cid];
+                $flight->status = "En-Route";
+            } elseif (!$flight || ($flight->status == "Arrived" && !$flight->checkArrival())) {
                 // Ignore the flight unless they are not airborne and are within their departure airport
                 if ($flight && !$flight->checkDeparture()) {
                     continue;
