@@ -157,8 +157,8 @@ class UpdateVATSIM extends Command
                 $flight->vatsim_id = $data[cid];
                 $flight->status = "En-Route";
             } elseif (!$flight || ($flight->status == "Arrived" && !$flight->checkArrival())) {
-                // Ignore the flight unless they are not airborne and are within their departure airport
-                if ($flight && !$flight->checkDeparture()) {
+                // Ignore those without flight plans
+                if ($flight && $data[planned_depairport] == '') {
                     continue;
                 }
                 $new = 1;
@@ -189,9 +189,9 @@ class UpdateVATSIM extends Command
             $flight->arrival = substr($data[planned_destairport], 0, 4);
             $flight->planned_alt = $data[planned_altitude];
 
-            if ($new == 1) {
+            /*if ($new == 1) {
                 if (!$flight->checkDeparture()) continue; // Skip non-departing flights
-            }
+            }*/
             $changedstatus = 0;
             // Check the status now
             if (($flight->status == "En-Route" || $flight->status == 'Incomplete') && $flight->checkArrival()) {
