@@ -208,7 +208,7 @@ class UpdateVATSIM extends Command
                 } else {
                     $flight->status = "Unknown"; $changedstatus = 1;
                 }
-            } elseif ($flight->status == "Departing Soon" && $flight->airborne()) {
+            } elseif (($flight->status == "Departing Soon" || $flight->status == 'Incomplete') && $flight->airborne()) {
                 $flight->departed_at = Carbon::now(); $changedstatus = 1;
                 $flight->status = "En-Route";
             }
