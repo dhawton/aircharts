@@ -216,6 +216,10 @@ class UpdateVATSIM extends Command
             $flight->missing_count = 0;
             $flight->save();
 
+            if ($flight->status == "En-Route") {
+                $flight->arrivalEst();
+            }
+
             if ($flight->spd > 250) {
               $interval = 2;
             } elseif ($flight->spd > 100) {

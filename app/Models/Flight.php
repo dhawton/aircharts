@@ -36,6 +36,20 @@ class Flight extends Model {
         return false;
     }
 
+    function arrivalEst() {
+        if ($this->status != "En-Route") { return 0; }
+        if (!$this->arrival) { return; }
+        $arrap = Airport::find($this->arrival);
+        if (!$arrap) return;
+        $dist = MathHelper::calc_distance($this->lat, $this->lon, $arrap->lat, $arrap->lon);
+        $time = $dist / $this->spd;         // Ground speed estimate
+        $time = $time * 60 * 60;            // Convert to seconds
+        $time += 10 * 60;                   // Add 10 minutes est. for arrival
+        $time = time() + $time;
+        $this->arrival_est = $time;
+        $this->save();
+    }
+
     function airborne() {
         if ($this->spd > 50) {
             return true;
