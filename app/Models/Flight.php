@@ -38,7 +38,7 @@ class Flight extends Model {
 
     function arrivalEst() {
         if ($this->status != "En-Route") { return 0; }
-        if (!$this->arrival) { return; }
+        if (!$this->arrival || $this->spd <= 0) { return; }
         $arrap = Airport::find($this->arrival);
         if (!$arrap) return;
         $dist = MathHelper::calc_distance($this->lat, $this->lon, $arrap->lat, $arrap->lon);
