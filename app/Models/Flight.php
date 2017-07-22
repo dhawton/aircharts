@@ -46,7 +46,7 @@ class Flight extends Model {
         $time = $time * 60 * 60;            // Convert to seconds
         $time += 10 * 60;                   // Add 10 minutes est. for arrival
         $time = time() + $time;
-        $this->arrival_est = round($time, 0);
+        $this->arrival_est = date("Y-m-d H:i:s", $time);
         $this->save();
     }
 
