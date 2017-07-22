@@ -46,7 +46,7 @@ class Flight extends Model {
         $time = $dist / $this->spd;         // Ground speed estimate
         $hr = floor($time);
         $min = intval((($hr - $time) + .25) * 60);
-        $this->arrival_est = Carbon::now()->addHour($hr)->addMinute($min)->format('Y-m-d H:i:s');;
+        $this->arrival_est = Carbon::now("UTC")->addHour($hr)->addMinute($min)->format('Y-m-d H:i:s');;
         $this->save();
     }
 
