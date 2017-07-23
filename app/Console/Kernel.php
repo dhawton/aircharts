@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('UpdateVATSIM')->everyMinute();
+        //$schedule->command('UpdateVATSIM')->everyMinute();
 
         $schedule->command('spider:at')->weeklyOn(1, '03:30');
         $schedule->command('spider:ch')->dailyAt('02:40');
