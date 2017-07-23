@@ -238,6 +238,21 @@ class UpdateVATSIM extends Command
                 $position->spd = $data[groundspeed];
                 $position->hdg = $data[heading];
                 $position->save();
+
+                // Get ready for JSON position data
+                $position = [
+                    'lat' => $data[latitude],
+                    'lon' => $data[lonitude],
+                    'alt' => $data[altitude],
+                    'spd' => $data[groundspeed],
+                    'hdg' => $data[heading],
+                    'datetime' => $current_update
+                ];
+                $flight->positions = json_encode(
+                    arrage_merge(json_decode($flight->positions, true), $position),
+                    JSON_NUMERIC_CHECK
+                );
+                $flight->save();
             }
         }
 
