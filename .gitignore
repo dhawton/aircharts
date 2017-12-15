@@ -7,10 +7,6 @@
 Homestead.json
 Homestead.yaml
 .env
-public/pmadmin
 public/ECR
-public/ecrimages
-public/images
-public/pdns
-vendor
+/vendor
 storage/log

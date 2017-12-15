@@ -36,7 +36,7 @@
                     <a href="//api.aircharts.org" class="nav-link">API</a>
                 </li>
                 <li>
-                    <a href="/about/ecr">ECR</a>
+                    <a href="https://ecr.aircharts.org">ECR</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-right" method="post" action="/charts">

@@ -16,3 +16,5 @@ RUN rm /usr/local/bin/composer.phar
 RUN chown -R application:application /app
 
 RUN php artisan optimize
+
+RUN crontab -l | { cat; echo "00    00    *     *     *    su -c 'cd /app && php artisan airport:cache' application"; } crontab -
