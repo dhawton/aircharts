@@ -2,6 +2,8 @@ FROM webdevops/php-nginx:alpine-php7
 
 WORKDIR /app
 
+COPY prep.sh /opt/docker/provision/entrypoint.d/99-prep.sh
+
 COPY vhost.conf /opt/docker/etc/nginx
 COPY composer.lock composer.json /app/
 COPY . /app
@@ -18,4 +20,3 @@ RUN chown -R application:application /app
 RUN php artisan optimize
 
 RUN crontab -l | { cat; echo "0    0    *     *     *    su -c 'cd /app && php artisan airport:cache' application"; } | crontab -
-RUN crontab -l | { cat; echo "@reboot su -c 'cd /app && php artisan airport:cache' application"; } | crontab -

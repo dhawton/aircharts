@@ -6,4 +6,4 @@ services:
     container_name: aircharts
     build: .
     ports:
-      - 9000:9000
+      - 5002:80
