@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Response;
 class ACController extends Controller
 {
     public function getIndex() {
+      if (\Storage::disk("local")->has("airport.cache")) {
         $mappoints = \Storage::disk('local')->get('airport.cache');
+      } else {
+        $mappoints = "";
+      }
 
         return view('index', ['mappoints' => $mappoints]);
     }
