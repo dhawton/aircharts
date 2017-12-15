@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         Commands\SpiderUK::class,           // UK
         Commands\SpiderUS::class,           // US
         Commands\MakeCache::class,
+        Commands\DockerPrepare::class,
     ];
 
     /**
