@@ -16,5 +16,3 @@ RUN rm /usr/local/bin/composer.phar
 RUN chown -R application:application /app
 
 RUN php artisan optimize
-
-CMD php artisan docker:prepare
