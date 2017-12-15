@@ -20,6 +20,5 @@ if (!file_exists("/app/.env") && file_exists("/run/secrets/aircharts.env")) {
   file_put_contents("/app/.env", $data, FILE_APPEND);
   file_put_contents("/app/.env", "APP_KEY=" . file_get_contents("/run/secrets/aircharts.key") . "\n", FILE_APPEND);
 
-  call_in_background("airport:cache");
   header("Location: https://www.aircharts.org/");
 }

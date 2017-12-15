@@ -37,6 +37,7 @@ class MakeCache extends Command
      */
     public function handle()
     {
+        \Log::info("In airport:cache");
         $airports = \DB::select("SELECT DISTINCT charts.icao, airports.lat, airports.lon FROM charts, airports WHERE charts.icao=airports.id OR charts.iata=airports.id");
 
         $output = "";
