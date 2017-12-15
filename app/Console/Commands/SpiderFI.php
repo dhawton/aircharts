@@ -7,7 +7,7 @@ use App\Models\Airport;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class SpiderRU extends Command
+class SpiderFI extends Command
 {
     /**
      * The name and signature of the console command.
