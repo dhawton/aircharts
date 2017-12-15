@@ -12,3 +12,5 @@ public/ECR
 public/ecrimages
 public/images
 public/pdns
+vendor
+storage/log
