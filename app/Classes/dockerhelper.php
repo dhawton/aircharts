@@ -15,9 +15,9 @@ function docker_secret_callable(string $name, string $default = ""): Closure
     };
 }
 
-if (env('HAS_SECRETS', 0) != 1 && file_exists("/run/secrets/aircharts.env")) {
+if (!file_exists("/app/.env") && file_exists("/run/secrets/aircharts.env")) {
   $data = file_get_contents("/run/secrets/aircharts.env");
-  file_put_contents(app_path(".env"), $data, FILE_APPEND);
-  file_put_contents(app_path(".env"), "HAS_SECRETS=1\n", FILE_APPEND);
+  file_put_contents("/app/.env", $data, FILE_APPEND);
+  file_put_contents("/app/.env", "HAS_SECRETS=1\n", FILE_APPEND);
   header("Location: https://www.aircharts.org/");
 }
