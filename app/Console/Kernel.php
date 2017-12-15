@@ -13,21 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\UpdateVATSIM::class,
-        Commands\SpiderAT::class,           // Austria
-        Commands\SpiderCH::class,           // Switzerland
-        Commands\SpiderDE::class,           // Germany
-        Commands\SpiderFR::class,           // France
-        Commands\SpiderHK::class,           // Hong Kong
-        Commands\SpiderHU::class,           // Hungary
-        Commands\SpiderIR::class,           // Ireland
-        Commands\SpiderPL::class,           // Poland
-        Commands\SpiderPT::class,           // Portugal
-        Commands\SpiderRU::class,           // Russia/Tajikistan/Turkmenistan
-        Commands\SpiderUK::class,           // UK
-        Commands\SpiderUS::class,           // US
-        Commands\MakeCache::class,
-        Commands\DockerPrepare::class,
     ];
 
     /**
