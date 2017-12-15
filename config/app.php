@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', docker_secret_callable("app_key")),
+    'key' => env('APP_KEY', docker_secret_callable("aircharts.key")),
 
     'cipher' => 'AES-256-CBC',
 

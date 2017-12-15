@@ -2,6 +2,7 @@ FROM webdevops/php-nginx:alpine-php7
 
 WORKDIR /app
 
+COPY vhost.conf /opt/docker/etc/nginx
 COPY composer.lock composer.json /app/
 COPY . /app
 
