@@ -1,0 +1,9 @@
+version: '3.1'
+
+services:
+  aircharts:
+    image: dhawton/aircharts
+    container_name: aircharts
+    build: .
+    ports:
+      - 9000:9000
