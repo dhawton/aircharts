@@ -59,9 +59,9 @@ class SpiderDE extends Command
             }
 
             $chart->icao = $d[ICAO];
-            $chart->airportname = utf8_encode($d[AP_NAME]);
+            $chart->airportname = strip_tags(utf8_encode($d[AP_NAME]));
             $chart->country = "DE";
-            $chart->chartname = utf8_encode($d[CHART_NAME]);
+            $chart->chartname = strip_tags(utf8_encode($d[CHART_NAME]));
             if ($d[CHART_TYPE] == "Arrival") {
                 $chart->charttype = "STAR";
             } elseif ($d[CHART_TYPE] == "Approach") {
