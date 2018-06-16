@@ -105,9 +105,8 @@ class SpiderUK extends Command
                         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                         $result = curl_exec($ch);
 
-                        \Storage::disk('s3')->put("uk/" . $chart->id . ".pdf", $result, "public");
-                        //sleep(1);
-                        $chart->url = "http://awsir.aircharts.org/uk/" . $chart->id . ".pdf";
+                        \Storage::disk('azure')->put("uk/" . $chart->id . ".pdf", $result, "public");
+                        $chart->url = \Storage::disk('azure')->url("uk/" . $chart->id . ".pdf");
                         $chart->save();
                     }
                 }
