@@ -6,6 +6,7 @@ use App\Chart;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Blob\Models\CreateBlockBlobOptions;
 
 class SpiderUK extends Command
 {
@@ -109,8 +110,8 @@ class SpiderUK extends Command
                         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                         $result = curl_exec($ch);
 
-                        $options = new CreateBlobOptions();
-                        $options->setBlobContentType("application/pdf");
+                        $options = new CreateBlockBlobOptions();
+                        $options->setContentType("application/pdf");
 
                         $blobClient->createBlockBlob(
                             "charts",
