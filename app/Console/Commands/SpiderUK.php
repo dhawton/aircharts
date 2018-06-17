@@ -109,13 +109,17 @@ class SpiderUK extends Command
                         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                         $result = curl_exec($ch);
 
+                        $options = new CreateBlobOptions();
+                        $options->setBlobContentType("application/pdf");
+
                         $blobClient->createBlockBlob(
-                            "uk",
-                            $chart->id . '.pdf',
-                            $result
+                            "charts",
+                            "uk/" . $chart->id . '.pdf',
+                            $result,
+                            $options
                         );
 
-                        $chart->url = config('filesystems.disks.azure.blob_service_url') . "uk/" . $chart->id . ".pdf";
+                        $chart->url = config('filesystems.disks.azure.blob_service_url') . "charts/uk/" . $chart->id . ".pdf";
                         $chart->save();
                     }
                 }
