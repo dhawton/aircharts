@@ -68,7 +68,6 @@ return [
             'container' => env('AZURE_EU_STORAGE_CONTAINER'),
             'blob_service_url' => env('AZURE_EU_SERVICE_URL'),
         ],
-
     ],
 
 ];

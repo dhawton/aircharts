@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e118fcbd05c3881517187af1bf2a1a2",
+    "content-hash": "fea0508174d7f9e2b1f994ca01b5c062",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -586,57 +586,6 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
-        },
-        {
-            "name": "ijin82/flysystem-azure",
-            "version": "1.0.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ijin82/flysystem-azure.git",
-                "reference": "816bb248a4b7bd38e9f8ddee33cc3b96312582ee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ijin82/flysystem-azure/zipball/816bb248a4b7bd38e9f8ddee33cc3b96312582ee",
-                "reference": "816bb248a4b7bd38e9f8ddee33cc3b96312582ee",
-                "shasum": ""
-            },
-            "require": {
-                "league/flysystem": "~1.0",
-                "microsoft/azure-storage-blob": "^1.0",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ijin82\\Flysystem\\Azure\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Frank de Jonge",
-                    "email": "info@frenky.net"
-                },
-                {
-                    "name": "Ilya Rogojin",
-                    "email": "ilya.rogojin@gmail.com"
-                }
-            ],
-            "description": "Flysystem adapter for Windows Azure (Fork of league/flysystem-azure)",
-            "time": "2018-02-26T13:09:40+00:00"
         },
         {
             "name": "illuminated/helper-functions",
@@ -3108,44 +3057,6 @@
             "time": "2018-03-03T17:56:25+00:00"
         },
         {
-            "name": "futureoriented/flysystem-azure-adapter",
-            "version": "v1.0.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/futureoriented/flysystem-azure-adapter.git",
-                "reference": "fdeb507e5e360c325484db425bf750f97ac5aa1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/futureoriented/flysystem-azure-adapter/zipball/fdeb507e5e360c325484db425bf750f97ac5aa1b",
-                "reference": "fdeb507e5e360c325484db425bf750f97ac5aa1b",
-                "shasum": ""
-            },
-            "require": {
-                "league/flysystem": "~1.0",
-                "microsoft/azure-storage": "^0.19.1",
-                "php": ">=5.5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FutureOriented\\FlysystemAzureAdapter\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Wu Junchao",
-                    "email": "zjuwujunchao@gmail.com"
-                }
-            ],
-            "description": "Another Flysystem adapter for Windows Azure",
-            "time": "2017-11-10T13:56:51+00:00"
-        },
-        {
             "name": "fzaninotto/faker",
             "version": "v1.7.1",
             "source": {
@@ -3239,67 +3150,6 @@
                 "test"
             ],
             "time": "2015-05-11T14:41:42+00:00"
-        },
-        {
-            "name": "microsoft/azure-storage",
-            "version": "v0.19.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Azure/azure-storage-php.git",
-                "reference": "e1702ae9e6194fa392b64a11737c5e3252d2c8e6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Azure/azure-storage-php/zipball/e1702ae9e6194fa392b64a11737c5e3252d2c8e6",
-                "reference": "e1702ae9e6194fa392b64a11737c5e3252d2c8e6",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6.0",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "@stable",
-                "mikey179/vfsstream": "~1.6",
-                "pdepend/pdepend": "~2.2",
-                "phpdocumentor/phpdocumentor": "dev-master",
-                "phploc/phploc": "~2.1",
-                "phpmd/phpmd": "@stable",
-                "phpunit/phpunit": "~4.0",
-                "sebastian/phpcpd": "~2.0",
-                "squizlabs/php_codesniffer": "@stable",
-                "theseer/phpdox": "~0.8"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.10.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MicrosoftAzure\\Storage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Azure Storage PHP SDK",
-                    "email": "dmsh@microsoft.com"
-                }
-            ],
-            "description": "This project provides a set of PHP client libraries that make it easy to access Microsoft Azure storage APIs.",
-            "keywords": [
-                "azure",
-                "php",
-                "sdk",
-                "storage"
-            ],
-            "abandoned": "microsoft/azure-storage-blob, microsoft/azure-storage-table, microsoft/azure-storage-queue, microsoft/azure-storage-file",
-            "time": "2017-09-25T08:35:45+00:00"
         },
         {
             "name": "mockery/mockery",

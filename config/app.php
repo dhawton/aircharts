@@ -177,7 +177,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
-        Ijin82\Flysystem\Azure\AzureBlobServiceProvider::class,
     ],
 
     /*

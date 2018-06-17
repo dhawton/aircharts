@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Chart;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 
 class SpiderUK extends Command
 {
@@ -54,6 +55,9 @@ class SpiderUK extends Command
 
         $x = 0; // For testing purposes, only do ~10 charts.
         $index = file($this->base_url . $this->index_url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
+
+        
+        $blobClient = BlobRestProxy::createBlobService(config('filesystems.disks.azure.endpoint'));
         foreach ($index as $index_line) {
             if (preg_match("!href=\"([^\"]+)\">(.+) - (EG[A-Z]{2})<\/a>!", $index_line, $matches)) {
                 $url = str_replace("&amp;", "&", $this->base_url . $matches[1]);
@@ -105,8 +109,13 @@ class SpiderUK extends Command
                         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                         $result = curl_exec($ch);
 
-                        \Storage::disk('azure')->put("uk/" . $chart->id . ".pdf", $result, "public");
-                        $chart->url = \Storage::disk('azure')->url("uk/" . $chart->id . ".pdf");
+                        $blobClient->createBlockBlob(
+                            "uk",
+                            $chart->id . '.pdf',
+                            $result
+                        );
+
+                        $chart->url = config('filesystems.disks.azure.blob_service_url') . "uk/" . $chart->id . ".pdf";
                         $chart->save();
                     }
                 }
