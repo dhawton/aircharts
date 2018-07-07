@@ -16,6 +16,9 @@ before_install:
 
 script:
   - docker-compose build
+  - if [ "$TRAVIS_TAG" ]; then
+    docker tag dhawton/aircharts dhawton/aircharts:$TRAVIS_TAG
+    fi
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
