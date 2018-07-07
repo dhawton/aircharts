@@ -57,16 +57,18 @@ class SpiderSI extends Command
         $data = file($this->airacheader, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
         foreach ($data as $line) {
             if (preg_match("!Currently Effective Issue!i", $line)) $current = true;
-            if (preg_match("!href=\"([0-9\-]+-AIRAC)\/", $line, $matches) && $current) {
-                $airac = $matches[0];
+            if (preg_match("!href=\"([0-9\-]+\-AIRAC)\/!i", $line, $matches) && $current) {
+                $airac = $matches[1];
                 break;
             }
         }
+        echo "Caught $airac\n";
 
         $tmpl = $this->base_url . $airac . $this->airport_tmpl;
 
         foreach ($this->airports as $icao => $name) {
             $apt_url = str_replace("%icao%", $icao, $tmpl);
+            echo "Processing $icao - $apt_url\n";
             $aptdata = file($apt_url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
             foreach ($aptdata as $line) {
                 if (preg_match("!Charts related to an aerodrome<\/h4>(<table.+<\/table>)!i", $line, $matches)) {
@@ -77,13 +79,16 @@ class SpiderSI extends Command
                      * <tr><td rowspan="2" valign="top" colspan="1" class="bleft btop bright bbottom">LJLJ AD 2.24.11-1</td><td colspan="1" class="bleft btop bright bbottom" rowspan="1">Radar Vectoring Chart</td></tr>
                      * <tr><td colspan="1" class="bleft btop bright bbottom" rowspan="1"><div class="graphic-box "><img src="../images/application_pdf.png" class="icon" alt="PDF"/><a id="LJLJ_AD_2.24.11-1" href="../../graphics/eAIP/LJ_AD_2_LJLJ_11-1_en.pdf">../graphics/eAIP/LJ_AD_2_LJLJ_11-1_en.pdf</a></div></td></tr>
                      */
-                    $chartname = $url = "";
+                    $chartname = $url = $cname = "";
                     foreach ($chartdata as $l) {
-                        if (preg_match("!rowspan=\"1\">([^<]+)<\/td!i", $l, $matches)) {
-                            $chartname = $matches[1];
+                        if (preg_match("!rowspan=\"1\">[ \t]*([^<]+)[ \t]*<\/td!i", $l, $matches)) {
+                            $cname = $matches[1];
+                            echo "  + ";
                         }
-                        elseif (preg_match("!href=\"(\.\.\/[^\"]+\.pdf)\"!i", $l, $matches)) {
-                            $url = $matches[1];
+                        elseif (preg_match("!id=\"([^\"]+)\" href=\"(\.\.\/[^\"]+\.pdf)\"!i", $l, $matches)) {
+                            $chartname = $cname . " (" . str_replace("_", " ", $matches[1]) . ")";
+                            $url = $matches[2];
+                            echo "$chartname @ $url\n";
 
                             $chart = Chart::where('icao', $icao)->where('chartname', $chartname)->first();
                             if (!$chart) $chart = new Chart();
@@ -92,56 +97,29 @@ class SpiderSI extends Command
                             $chart->country = "SI";
                             $chart->chartname = strip_tags(utf8_encode($chartname));
                             $chart->charttype = "General";
+                            if (preg_match("!SID!", $chartname)) {
+                                $chart->charttype = "SID";
+                            }
+                            if (preg_match("!STAR!", $chartname)) {
+                                $chart->charttype = "STAR";
+                            }
+                            if (preg_match("!ILS!", $chartname) || preg_match("!VOR!", $chartname) ||
+                                preg_match("!LOC!", $chartname) || preg_match("!VISUAL APPROACH!i", $chartname) ||
+                                preg_match("!GPS!", $chartname) || preg_match("!APPROACH!", $chartname)) {
+                                $chart->charttype = "Approach";
+                            }
+
+                            $chart->id = sha1("si.$icao,.$chartname");
+                            $chart->url = $this->base_url . $airac . "/html/eAIP/" . $url;
+                            $chart->save();
                         }
                     }
                 }
             }
         }
 
-        foreach ($data as $line) {
-            if (preg_match("!>([^(]+) \((EV[A-Z]{2})\)!i", $line, $matches)) {
-                $icao = $matches[2];
-                $name = $matches[1];
-            }
-            if (preg_match("!>Enroute airspace!i", $line)) {
-                break;
-            }
-            elseif (preg_match("!(\/CHARTS.+\.pdf)\"[^>]+>(.+)<\/a>!", $line, $matches)) {
-                if ($icao == "" || $name == "") {
-                    print "Got a chart matches with no known icao or airport on $line\n";
-                    exit;
-                }
-
-                $url = $matches[1];
-                $chartname = $matches[2];
-
-                $chart = Chart::where('icao', $icao)->where('chartname', $chartname)->first();
-                if (!$chart) $chart = new Chart();
-                $chart->icao = $icao;
-                $chart->airportname = strip_tags(utf8_encode($name));
-                $chart->country = "LV";
-                $chart->chartname = strip_tags(utf8_encode($chartname));
-                $chart->charttype = "General";
-                if (preg_match("!SID!", $chartname)) {
-                    $chart->charttype = "SID";
-                }
-                if (preg_match("!STAR!", $chartname)) {
-                    $chart->charttype = "STAR";
-                }
-                if (preg_match("!ILS!", $chartname) || preg_match("!VOR!", $chartname) ||
-                    preg_match("!LOC!", $chartname) || preg_match("!VISUAL APPROACH!i", $chartname) ||
-                    preg_match("!GPS!", $chartname) || preg_match("!APPROACH!", $chartname)) {
-                    $chart->charttype = "Approach";
-                }
-
-                $chart->id = sha1("si.$icao,.$chartname");
-                $chart->url = $this->base_url . $airac . "/html/eAIP/" . $url;
-                $chart->save();
-            }
-        }
-
         // Clear out non-updated charts
-        foreach (Chart::where('country', 'LV')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
+        foreach (Chart::where('country', 'SI')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
             $chart->delete();
         }
     }
