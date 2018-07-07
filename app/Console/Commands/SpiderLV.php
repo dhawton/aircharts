@@ -14,7 +14,7 @@ class SpiderLV extends Command
      *
      * @var string
      */
-    protected $signature = 'spider:LV';
+    protected $signature = 'spider:lv';
 
     /**
      * The console command description.
@@ -50,14 +50,14 @@ class SpiderLV extends Command
         $icao = ""; $name = "";
 
         foreach ($data as $line) {
-            if (preg_match("!>([^(]+) (EV[A-Z]{2})!i", $line, $matches)) {
+            if (preg_match("!>([^(]+) \((EV[A-Z]{2})\)!i", $line, $matches)) {
                 $icao = $matches[2];
                 $name = $matches[1];
             }
             if (preg_match("!>Enroute airspace!i", $line)) {
                 break;
             }
-            elseif (preg_match("!(\/CHARTS.+\.pdf)\"[^>]+>.+<\/a>!", $line, $matches)) {
+            elseif (preg_match("!(\/CHARTS.+\.pdf)\"[^>]+>(.+)<\/a>!", $line, $matches)) {
                 if ($icao == "" || $name == "") {
                     print "Got a chart matches with no known icao or airport on $line\n";
                     exit;
@@ -69,8 +69,9 @@ class SpiderLV extends Command
                 $chart = Chart::where('icao', $icao)->where('chartname', $cname)->first();
                 if (!$chart) $chart = new Chart();
                 $chart->icao = $icao;
+                $chart->airportname = strip_tags(utf8_encode($name));
                 $chart->country = "LV";
-                $chart->chartname = $cname;
+                $chart->chartname = strip_tags(utf8_encode($cname));
                 $chart->charttype = "General";
                 if (preg_match("!SID!", $cname)) {
                     $chart->charttype = "SID";
@@ -85,7 +86,7 @@ class SpiderLV extends Command
                 }
 
                 $chart->id = sha1("lv.$icao,.$cname");
-                $chart->url = $this->chart_base . $url;
+                $chart->url = $this->base_url . $url;
                 $chart->save();
             }
         }
