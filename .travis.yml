@@ -17,7 +17,7 @@ before_install:
 script:
   - docker-compose build
   - if [ -n "$TRAVIS_TAG" ]; then
-    docker tag dhawton/aircharts dhawton/aircharts:$TRAVIS_TAG
+    docker tag dhawton/aircharts dhawton/aircharts:$TRAVIS_TAG;
     fi
 
 after_success:
