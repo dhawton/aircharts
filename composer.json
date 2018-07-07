@@ -11,7 +11,8 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
-        "microsoft/azure-storage-blob": "^1.1"
+        "microsoft/azure-storage-blob": "^1.1",
+        "mihaeu/html-formatter": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
