@@ -16,13 +16,16 @@ before_install:
  - set
 
 script:
-  - docker-compose build
-  - if [ -n "$TRAVIS_TAG" ]; then
-    docker tag dhawton/aircharts dhawton/aircharts:$TRAVIS_TAG;
+  - docker build -t $DOCKER_USERNAME/aircharts .
+  - if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ]; then
+    docker build -t $DOCKER_USERNAME/aircharts:$TRAVIS_TAG .
     fi
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ] && [ -n "$TRAVIS_TAG" ]; then
-    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker push $DOCKER_USERNAME/aircharts:latest;
+    fi
+  - if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ]; then
     docker push $DOCKER_USERNAME/aircharts:$TRAVIS_TAG;
     fi
