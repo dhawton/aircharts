@@ -10,3 +10,4 @@ Homestead.yaml
 public/ECR
 /vendor
 storage/log
+.DS_Store
