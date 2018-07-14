@@ -59,11 +59,9 @@ class SpiderMX extends Command
         $blobClient = BlobRestProxy::createBlobService(config('filesystems.disks.azure.endpoint'));
 
         foreach ($data as $line) {
-
-            $airport = Airport::where('id', $icao)->first();
-            if (preg_match("!class=\"download-link\".+href=\"(https:\/\/vatmex\.net\/descargas\/\d+\/)\"", $line, $matches)) {
+            if (preg_match("!class=\"download-link\".+href=\"(https:\/\/vatmex\.net\/descargas\/\d+\/)\"!i", $line, $matches)) {
                 $url = $matches[1];
-            } elseif (preg_match("!(MM[A-Z]{2})\w*-\w*([^<]+)", $line, $matches)) {
+            } elseif (preg_match("!(MM[A-Z]{2})\w*-\w*([^<]+)!", $line, $matches) && $url != "") {
                 $icao = $matches[1];
                 $name = $matches[2];
 
@@ -74,7 +72,7 @@ class SpiderMX extends Command
                 $chart->country = "MX";
                 $chart->charttype = "General";
                 $chart->chartname = "VATMEX Package";
-                $chart->airportname = $airport->name;
+                $chart->airportname = $name;
                 $chart->id = sha1("mx.$icao,." . $chart->chartname);
 
                 $ch = curl_init();
@@ -101,6 +99,7 @@ class SpiderMX extends Command
 
                 $chart->url = config('filesystems.disks.azure.blob_service_url') . "charts/mx/" . $chart->id . ".pdf";
                 $chart->save();
+                $url = "";
             }
         }
 
