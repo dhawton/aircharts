@@ -6,6 +6,8 @@ use App\Chart;
 use App\Models\Airport;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Blob\Models\CreateBlockBlobOptions;
 
 class SpiderMX extends Command
 {
@@ -104,6 +106,7 @@ class SpiderMX extends Command
 
         // Clear out non-updated MX charts
         foreach (Chart::where('country', 'MX')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
+            $blobClient->deleteBlob("charts", "mx/" . $chart->id . ".pdf");
             $chart->delete();
         }
     }

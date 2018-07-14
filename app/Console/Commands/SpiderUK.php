@@ -57,7 +57,7 @@ class SpiderUK extends Command
         $x = 0; // For testing purposes, only do ~10 charts.
         $index = file($this->base_url . $this->index_url, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
 
-        
+
         $blobClient = BlobRestProxy::createBlobService(config('filesystems.disks.azure.endpoint'));
         foreach ($index as $index_line) {
             if (preg_match("!href=\"([^\"]+)\">(.+) - (EG[A-Z]{2})<\/a>!", $index_line, $matches)) {
@@ -129,7 +129,7 @@ class SpiderUK extends Command
 
         // Clear out non-updated UK charts
         foreach (Chart::where('country', 'UK')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
-            \Storage::disk('s3')->delete("uk/" . $chart->id . ".pdf");
+            $blobClient->deleteBlob("charts", "uk/" . $chart->id . ".pdf");
             $chart->delete();
         }
     }
