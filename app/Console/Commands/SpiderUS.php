@@ -40,10 +40,10 @@ class SpiderUS extends Command
      */
     public function handle()
     {
-        $nextdate = Storage::disk('local')->get('spider.us.date');
-        if ($nextdate != date("m/d/y")) return;
-
-        $airac = Storage::disk('local')->get('spider.us.airac');
+        $data = \DB::table("chart_data")->whereRaw("value", date("m/d/y"))->where("key", "US_NEXTDATE")->first();
+        if (!$data) { return; }
+        $airac = \DB::table("chart_data")->where("key", "US_AIRAC")->first();
+        $airac = $airac->value;
         if (substr($airac, -2) == "13") {
             $airac = date("y") . "01";
         } else {
@@ -59,8 +59,8 @@ class SpiderUS extends Command
         $todate = $xml->attributes()->to_edate;
         preg_match("!\d+Z\s+(\d+/\d+/\d+)$!", $todate, $matches);
         $todate = $matches[1];
-        Storage::disk('local')->put('spider.us.date', $todate);
-        Storage::disk('local')->put('spider.us.airac', $cycle);
+        \DB::table("chart_data")->update(['value' => $cycle])->where('key', 'US_AIRAC');
+        \DB::table("chart_data")->update(['value' => $todate])->where('key', 'US_NEXTDATE');
 
         // Start processing
         foreach($xml->state_code as $state) {
