@@ -59,8 +59,7 @@ class SpiderUS extends Command
         $todate = $xml->attributes()->to_edate;
         preg_match("!\d+Z\s+(\d+/\d+/\d+)$!", $todate, $matches);
         $todate = $matches[1];
-        \DB::table("chart_data")->where('key', 'US_AIRAC')->update(['value' => $cycle]);
-        \DB::table("chart_data")->where('key', 'US_NEXTDATE')->update(['value' => $todate]);
+
 
         // Start processing
         foreach($xml->state_code as $state) {
@@ -102,5 +101,8 @@ class SpiderUS extends Command
         foreach (Chart::where('country', 'US')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
             $chart->delete();
         }
+
+        \DB::table("chart_data")->where('key', 'US_AIRAC')->update(['value' => $cycle]);
+        \DB::table("chart_data")->where('key', 'US_NEXTDATE')->update(['value' => $todate]);
     }
 }
