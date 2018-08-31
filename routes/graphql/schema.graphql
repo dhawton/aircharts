@@ -1,0 +1,25 @@
+type Airport {
+  id: String
+  name: String
+  lat: Float
+  lon: Float
+  city: String
+  admin: String
+  country_id: String
+}
+
+type Chart {
+  id: String!
+  icao: String
+  iata: String
+  country: String!
+  airportname: String!
+  chartname: String!
+  charttype: String!
+  url: String!
+}
+
+type Query {
+  airport(id: String!): Airport @field(resolver: "App\\Http\\GraphQL\\Query@airport")
+  charts(id: String!, type: String): [Chart] @field(resolver: "App\\Http\\GraphQL\\Query@charts")
+}
