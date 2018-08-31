@@ -40,7 +40,7 @@ class SpiderUS extends Command
      */
     public function handle()
     {
-        $data = \DB::table("chart_data")->where("value", date("m/d/y"))->where("key", "US_NEXTDATE")->first();
+        $data = \DB::table("chart_data")->whereRaw("CONVERT(`value` AS int) <= " . time())->where("key", "US_NEXTDATE")->first();
         if (!$data) { return; }
         $airac = \DB::table("chart_data")->where("key", "US_AIRAC")->first();
         $airac = $airac->value;
@@ -59,6 +59,8 @@ class SpiderUS extends Command
         $todate = $xml->attributes()->to_edate;
         preg_match("!\d+Z\s+(\d+/\d+/\d+)$!", $todate, $matches);
         $todate = $matches[1];
+        $dt = explode("/", $todate);
+        $todate = Carbon::createFromFormat("Y-m-d H:i:s", "20" . $dt[2] . "-" . $dt[0] . "-" . $dt[1]. " 00:00:00")->timestamp();
 
 
         // Start processing
