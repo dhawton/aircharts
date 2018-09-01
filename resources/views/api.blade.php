@@ -62,6 +62,29 @@ https://api.aircharts.org/v2/Airport/EGSS,EGLL,KBOS
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">GraphQL Support</h3></div>
+            <div class="panel-body">
+                GraphQL is supported.  URL: https://api.aircharts.org/graphql
+                <p>Schema:</p>
+                <pre><code>type Chart {
+  id: String!
+  icao: String
+  iata: String
+  country: String!
+  airportname: String!
+  chartname: String!
+  charttype: String!
+  url: String!
+}
+
+type Query {
+  charts(id: String!, type: String): [Chart] @field(resolver: "App\\Http\\GraphQL\\Query@charts")
+}</code></pre>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

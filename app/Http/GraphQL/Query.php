@@ -2,15 +2,11 @@
 namespace App\Http\GraphQL;
 
 class Query {
-    public function airport($root, array $args, $context, $info) {
-        return \App\Airport::find($args['id']);
-    }
-
     public function charts($root, array $args, $context, $info) {
         if (isset($args['type'])) {
-            return \App\Chart::where('id', $args['id'])->where('charttype', $args['type'])->get();
+            return \App\Chart::where('icao', $args['icao'])->where('charttype', $args['type'])->get();
         } else {
-            return \App\Chart::where('id', $args['id'])->orderBy('charttype')->get();
+            return \App\Chart::where('icao', $args['icao'])->orderBy('charttype')->get();
         }
     }
 }
