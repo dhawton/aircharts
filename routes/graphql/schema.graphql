@@ -10,5 +10,5 @@ type Chart {
 }
 
 type Query {
-  charts(id: String!, type: String): [Chart] @field(resolver: "App\\Http\\GraphQL\\Query@charts")
+  charts(icao: String!, type: String): [Chart] @field(resolver: "App\\Http\\GraphQL\\Query@charts")
 }

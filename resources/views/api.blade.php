@@ -80,7 +80,7 @@ https://api.aircharts.org/v2/Airport/EGSS,EGLL,KBOS
 }
 
 type Query {
-  charts(id: String!, type: String): [Chart] @field(resolver: "App\\Http\\GraphQL\\Query@charts")
+  charts(icao: String!, type: String): [Chart]
 }</code></pre>
             </div>
         </div>
