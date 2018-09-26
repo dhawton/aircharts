@@ -23,7 +23,7 @@
 <script type="text/javascript">
 var map;
 function init() {
-    var map = L.map('divmap').setView([37.4,0], 2)
+    var map = L.map('mapdiv').setView([37.4,0], 2)
 
     var icon = L.icon({
       iconUrl: '/images/map/dot.png',
