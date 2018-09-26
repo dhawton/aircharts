@@ -44,9 +44,7 @@ class MakeCache extends Command
         $x = 1;
 
         foreach($airports as $airport) {
-            $output .= "    var myLatLng = new google.maps.LatLng(" . $airport->lat . ", " . $airport->lon . ");\n";
-            $output .= "    var markerOpt = { map: map, position: myLatLng, icon: '/images/map/dot.png' };\n";
-            $output .= "    marker_$x = new google.maps.Marker(markerOpt);\n";
+            $output .= " L.marker([" . $airport->lat . "," . $airport->lon . "], {icon: icon}).addTo(map);\n";
             $x++;
         }
 

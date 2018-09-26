@@ -14,27 +14,26 @@
 @endsection
 
 @section('js')
-<script type="text/javascript" src="https://maps-api-ssl.google.com/maps/api/js?sensor=false"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+            crossorigin=""></script>
 <script type="text/javascript">
 var map;
 function init() {
-    var style0 = [{"featureType":"all","stylers":[{"saturdation":"-100"}]},{"featureType":"transit.station.airport","elementType":"gemoetry","stylers":[{"hue":"#000000"}]}];
-    //var myLatLng = new google.maps.LatLng(37.4, -122.1);
-    var myLatLng = new google.maps.LatLng(37.4, 0);
-    var myOpt = {
-        zoom: 2,
-        center: myLatLng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        disableDefaultUI: true,
-        mapTypeControl: true,
-        navigationControl: false,
-        scaleControl: true,
-        streetViewControl: false,
-        minZoom: 2,
-        maxZoom: 8}
+    var map = L.map('divmap').setView([37.4,0], 2)
 
-    map = new google.maps.Map(document.getElementById("mapdiv"), myOpt);
-    map.setOptions({styles: style0});
+    var icon = L.icon({
+      iconUrl: '/images/map/dot.png',
+      iconSize: [7, 7],
+      iconAnchor: [3, 3]
+    });
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+  }).addTo(map);
 
     {!! $mappoints !!}
 }
