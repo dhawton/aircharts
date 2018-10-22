@@ -40,7 +40,7 @@ class SpiderUS extends Command
      */
     public function handle()
     {
-        $data = \DB::table("chart_data")->whereRaw("CONVERT(`value` AS int) <= " . time())->where("key", "US_NEXTDATE")->first();
+        $data = \DB::table("chart_data")->where("value", "<=", time())->where("key", "US_NEXTDATE")->first();
         if (!$data) { return; }
         $airac = \DB::table("chart_data")->where("key", "US_AIRAC")->first();
         $airac = $airac->value;
@@ -105,6 +105,6 @@ class SpiderUS extends Command
         }
 
         \DB::table("chart_data")->where('key', 'US_AIRAC')->update(['value' => $cycle]);
-        \DB::table("chart_data")->where('key', 'US_NEXTDATE')->update(['value' => $todate]);
+        \DB::table("chart_data")->where('key', 'US_NEXTDATE')->update(['value' => strtotime($todate)]);
     }
 }
