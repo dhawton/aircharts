@@ -59,8 +59,6 @@ class SpiderUS extends Command
         $todate = $xml->attributes()->to_edate;
         preg_match("!\d+Z\s+(\d+/\d+/\d+)$!", $todate, $matches);
         $todate = $matches[1];
-        $dt = explode("/", $todate);
-        $todate = Carbon::createFromFormat("Y-m-d H:i:s", "20" . $dt[2] . "-" . $dt[0] . "-" . $dt[1]. " 00:00:00")->timestamp();
 
 
         // Start processing
@@ -98,7 +96,7 @@ class SpiderUS extends Command
                 }
             }
         }
-        
+
         foreach (Chart::where('country', 'US')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
             $chart->delete();
         }
