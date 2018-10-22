@@ -98,8 +98,7 @@ class SpiderUS extends Command
                 }
             }
         }
-
-        // Clear out non-updated US charts
+        
         foreach (Chart::where('country', 'US')->where('updated_at', '<', Carbon::yesterday()->toDateString())->get() as $chart) {
             $chart->delete();
         }
