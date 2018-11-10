@@ -40,8 +40,8 @@ class SpiderUS extends Command
      */
     public function handle()
     {
-        $data = \DB::table("chart_data")->where("value", "<=", time())->where("key", "US_NEXTDATE")->first();
-        if (!$data) { return; }
+        $data = \DB::table("chart_data")->where("key", "US_NEXTDATE")->first();
+        if ((int)$data->value > time()) { return; }
         $airac = \DB::table("chart_data")->where("key", "US_AIRAC")->first();
         $airac = $airac->value;
         if (substr($airac, -2) == "13") {
